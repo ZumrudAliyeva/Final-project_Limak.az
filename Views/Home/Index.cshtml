@@ -1,0 +1,381 @@
+﻿@model Final_project_Limak.az.Models.RegisterViewModel
+
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<main class="w-100">
+    <div class="container-main w-100">
+        <!-- ==== slider and calculator ================= -->
+        <section class="container slide-calc">
+            <div class="row">
+                <div class="banner-main col-8 col-md-8 col-sm-12 col-xs-12">
+                    <ul class="slider-main d-flex list-unstyled overflow-hidden w-100 owl-carousel">
+                        <li class="item slide slide-1">
+                            <a href="" class="w-100 h-100">
+                                <img src="~/images/slider_1601033241.png" alt="">
+                            </a>
+                        </li>
+                        <li class="item slide slide-2">
+                            <a href="" class="w-100 h-100">
+                                <img src="~/images/slider_1601477096.png" alt="">
+                            </a>
+                        </li>
+                        <li class="item slide slide-3">
+                            <a href="" class="w-100 h-100">
+                                <img src="~/images/slider_1601477178.png" alt="">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="calculator-main col-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="block">
+                        <h4 class="w-100">
+                            Kalkulyator<span id="reset_calculator">Kalkulyatoru sıfırla</span>
+                        </h4>
+                        <div class="row">
+                            <div class="col-6 col-xs-6 pl-0">
+                                <div class="input-group mb-4">
+                                    <select class="form-control selectpicker d-none" id="country" title="Ölkə">
+                                        <option selected="" value="1">Türkiyə</option>
+                                        <option value="2">Amerika</option>
+                                    </select>
+                                    <button id="country"
+                                            class="btn w-100 position-relative btn-default text-left calc_place">
+                                        Türkiyə
+                                    </button>
+                                    <img src="~/images/chevron-small.png" alt=""
+                                         class="position-absolute calc-chevron">
+                                    <ul class="dropdown_menu_calc position-absolute list-unstyled">
+                                        <li><a href="" class="d-block w-100">Türkiyə</a></li>
+                                        <li><a href="" class="d-block w-100">Amerika</a></li>
+                                    </ul>
+                                </div>
+                                <div class="input-group mb-4">
+                                    <input type="text" name="" id="weight"
+                                           class="form-control inputText position-relative">
+                                    <span class="position-absolute input_span">Çəki</span>
+                                    <div class="input-group-btn">
+                                        <button id="weight-btn"
+                                                class="btn calc-btn w-100 position-relative btn-default text-left">
+                                            kq
+                                        </button>
+                                        <img src="~/images/chevron-small.png" alt=""
+                                             class="position-absolute calc-chevron">
+                                        <ul class="dropdown_menu_calc weight-ul position-absolute list-unstyled">
+                                            <li><a href="" class="d-block w-100">kq</a></li>
+                                            <li><a href="" class="d-block w-100">qram</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-4">
+                                    <input type="text" name="" id=""
+                                           class="form-control inputText position-relative">
+                                    <span class="position-absolute input_span">En</span>
+                                    <div class="input-group-btn">
+                                        <button id="weight-btn"
+                                                class="btn calc-btn w-100 position-relative btn-default text-left">
+                                            sm
+                                        </button>
+                                        <img src="~/images/chevron-small.png" alt=""
+                                             class="position-absolute calc-chevron">
+                                        <ul class="dropdown_menu_calc width_ul position-absolute list-unstyled">
+                                            <li><a href="" class="d-block w-100">sm</a></li>
+                                            <li><a href="" class="d-block w-100">dm</a></li>
+                                            <li><a href="" class="d-block w-100">m</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-4">
+                                    <input type="text" name="" id=""
+                                           class="form-control inputText position-relative">
+                                    <span class="position-absolute input_span">Hündürlük</span>
+                                    <div class="input-group-btn">
+                                        <button id="weight-btn"
+                                                class="btn calc-btn w-100 position-relative btn-default text-left">
+                                            sm
+                                        </button>
+                                        <img src="~/images/chevron-small.png" alt=""
+                                             class="position-absolute calc-chevron">
+                                        <ul class="dropdown_menu_calc width_ul position-absolute list-unstyled">
+                                            <li><a href="" class="d-block w-100">sm</a></li>
+                                            <li><a href="" class="d-block w-100">dm</a></li>
+                                            <li><a href="" class="d-block w-100">m</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-xs-6 pr-0">
+                                <div class="input-group mb-4">
+                                    <button id="city"
+                                            class="btn w-100 position-relative btn-default text-left calc_place">
+                                        Bakı
+                                    </button>
+                                    <img src="~/images/chevron-small.png" alt=""
+                                         class="position-absolute calc-chevron">
+                                    <ul class="dropdown_menu_calc position-absolute list-unstyled">
+                                        <li><a href="" class="d-block w-100">Gəncə</a></li>
+                                        <li><a href="" class="d-block w-100">Sumqayıt</a></li>
+                                        <li><a href="" class="d-block w-100">Zaqatala</a></li>
+                                        <li><a href="" class="d-block w-100">Lənkəran</a></li>
+                                    </ul>
+                                </div>
+                                <div class="input-group mb-4">
+                                    <input type="text" name="" id="count_pack"
+                                           class="form-control inputText position-relative">
+                                    <span class="position-absolute input_span">Bağlama sayı</span>
+                                </div>
+                                <div class="input-group mb-4">
+                                    <input type="text" name="" id=""
+                                           class="form-control inputText position-relative">
+                                    <span class="position-absolute input_span">Uzunluq</span>
+                                    <div class="input-group-btn">
+                                        <button id=""
+                                                class="btn calc-btn w-100 position-relative btn-default text-left">
+                                            sm
+                                        </button>
+                                        <img src="~/images/chevron-small.png" alt=""
+                                             class="position-absolute calc-chevron">
+                                        <ul class="dropdown_menu_calc length_ul position-absolute list-unstyled">
+                                            <li><a href="" class="d-block w-100">sm</a></li>
+                                            <li><a href="" class="d-block w-100">dm</a></li>
+                                            <li><a href="" class="d-block w-100">m</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-4">
+                                    <button id="calculate" class="btn-effect border-btn w-100">Hesabla</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-xs-12 p-0">
+                            <p class="count">Cəmi: <b class="all_count">$0,00</b></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =========== how it works =================== -->
+        <section class="how_it_works w-100">
+            <div class="container">
+                <h1 class="w-100">Necə işləyir ?</h1>
+                <div class="block col-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="block-inner">
+                                <img src="~/images/mehsulunu_sec.png" class="img-responsive" alt="box">
+                                <p class="head">Qeydiyyatdan keç</p>
+                                <p class="text">
+                                    Limak.az saytında qeydiyyatdan keçməklə, xaricdə daimi ünvana
+                                    sahib olun.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="block-inner">
+                                <img src="~/images/box.png" class="img-responsive" alt="box">
+                                <p class="head">Sifarişi bizə yolla</p>
+                                <p class="text">
+                                    Onlayn mağazalardan alış-veriş edərkən bağlamanızın
+                                    çatdırılacağı ünvan yerinə sizə təmin etdiyimiz ünvanı daxil edin.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="block-inner">
+                                <img src="~/images/courier.png" class="img-responsive" alt="box">
+                                <p class="head">Bağlamanı əldə et</p>
+                                <p class="text">
+                                    3-5 iş günü ərzində sifarişinizi Bakı anbarımızdan əldə edə və
+                                    ya kuryer xidmətimizdən istifadə edə bilərsiniz.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =========== tarifs =================== -->
+        <section class="tarifs">
+            <div class="section-header">
+                <h2>ÖLKƏLƏR ÜZRƏ TARİFLƏR</h2>
+            </div>
+            <div class="container">
+                <div class="row w-100">
+                    <ul class="nav nav-tabs">
+                        <li class="d-flex justify-content-center align-items-center position-relative active">
+                            <img src="~/images/order-turkey .png" alt="">
+                            <a href="" class="img1 w-100">Türkiyə</a>
+                        </li>
+                        <li class="d-flex justify-content-center align-items-center position-relative">
+                            <img src="~/images/order-US.png" alt="">
+                            <a href="#tab2" class="img2 w-100">Amerika</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content block col-sm-12 col-xs-12">
+                        <div class="tab-panel">
+                            <div class="col-12 col-sm-12 col-xs-12">
+                                <div class="top d-flex justify-content-start align-items-center">
+                                    <img src="~/images/turkey.png" alt="flag-tr">
+                                    <p class="head">Türkiyədən çatdırılma</p>
+                                </div>
+                                <ul class="nav nav-inner-tabs country-tabs">
+                                    <li class="active">
+                                        <a href="" class="">Türkiyə-Bakı</a>
+                                    </li>
+                                    <li>
+                                        <a href="" class="">Türkiyə-Gəncə</a>
+                                    </li>
+                                    <li>
+                                        <a href="" class="">Türkiyə-Sumqayıt</a>
+                                    </li>
+                                    <li>
+                                        <a href="" class="">Türkiyə-Zaqatala</a>
+                                    </li>
+                                    <li>
+                                        <a href="" class="">Türkiyə-Lənkəran</a>
+                                    </li>
+                                    <li>
+                                        <span>Ardı var...</span>
+                                    </li>
+                                </ul>
+                                <div class="tab-pane active w-100" id="turkey">
+                                    <ul class="w-100 list-unstyled tabpane-ul">
+                                        <li>0 dan - 0,25 kq dək<span>2.00 $</span></li>
+                                        <li>0,25 kq dan - 0.5 kq dək<span>3.00 $</span></li>
+                                        <li>0,5 kq dan - 0.7 kq dək<span>4.00 $</span></li>
+                                        <li>0,7 kq dan - 1 kq dək<span>4.50 $</span></li>
+                                    </ul>
+                                </div>
+                                <div class="bottom-text">
+                                    <b>Maye məhsullar üçün</b>
+                                    <div>
+                                        <ul class="w-100 list-unstyled tabpane-ul">
+                                            <li>0 dan - 0,25 kq dək<span>2.50 $</span></li>
+                                            <li>0,25 kq dan - 0.5 kq dək<span>4.00 $</span></li>
+                                            <li>0,5 kq dan - 0.7 kq dək<span>6.00 $</span></li>
+                                            <li>0,7 kq dan - 1 kq dək<span>7.50 $</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="bottom-text">
+                                    <p>
+                                        Korporativ təkliflər üçün corporate@limak.az email ünvanına yaza
+                                        bilərsiniz.
+                                    </p>
+                                    <p>
+                                        Şirkətimiz Türkiyə və Amerikadan yüklərin daşınması ilə məşğul olur.
+                                        Sizin sifarişləriniz həftədə 2 dəfə Türkiyədən, 1 dəfə isə Amerikadan
+                                        Bakıya çatdırılır.
+                                    </p>
+                                    <p>
+                                        Limak Sizə bağlamalarınızın çəkisindən asılı olaraq, Türkiyədən 2
+                                        dollardan, ABŞ-dan isə 1.99 dollardan başlayan qiymətlərlə sərfəli
+                                        çatdırılma təklif edir.
+
+                                        Sifariş olunan bağlamanın çatdırılma haqqı çəkiyə görə hesablanır.
+                                        Ölçüsü 1 metrdən böyük olan bağlamaların kargo pulu isə həcmi çəkiyə
+                                        görə müəyyən edilir.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-panel">
+                            <div class="col-12 col-sm-12 col-xs-12"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ============= certificates and partners ================ -->
+        <section class="how_it_works how_it_works_2">
+            <div class="container">
+                <h1>SERTİFİKATLARIMIZ VƏ TƏRƏFDAŞLARIMIZ</h1>
+                <div class="block col-xs-12">
+                    <div class="row">
+                        <div class="col-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="block-inner">
+                                <img src="~/images/IATA.png" class="img-responsive w-100" alt="box"
+                                     style="margin-bottom: 0">
+                            </div>
+                        </div>
+                        <div class="col-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="block-inner">
+                                <img src="~/images/fiata.png" class="img-responsive w-100" alt="box"
+                                     style="margin-bottom: 0">
+                            </div>
+                        </div>
+                        <div class="col-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="block-inner">
+                                <img src="~/images/THY.png" class="img-responsive w-100" alt="box"
+                                     style="margin-bottom: 0">
+                            </div>
+                        </div>
+                        <div class="col-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="block-inner">
+                                <img src="~/images/Silkway.png" class="img-responsive w-100" alt="box"
+                                     style="margin-bottom: 0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =============== news ================= -->
+        <section class="last-news">
+            <div class="container">
+                <h2>YENİLİKLƏR VƏ ELANLAR</h2>
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <a href="https://limak.az/az/blog/110" class="news-box">
+                            <img src="~/images/news_1601790227.png" class="img-responsive w-100"
+                                 alt="news-01">
+                            <div class="caption">
+                                <h4>Ordumuza dəstək!</h4>
+                                <p><i class="fa fa-calendar"></i>04.10.2020</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <a href="https://limak.az/az/blog/109" class="news-box">
+                            <img src="~/images/shop_1600455409.png" class="img-responsive w-100"
+                                 alt="news-01">
+                            <div class="caption">
+                                <h4>Gəncə anbarımızın ünvanı dəyişdi!</h4>
+                                <p><i class="fa fa-calendar"></i>03.10.2020</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <a href="https://limak.az/az/blog/108" class="news-box">
+                            <img src="~/images/shop_1601477058.png" class="img-responsive w-100"
+                                 alt="news-01">
+                            <div class="caption">
+                                <h4>Gömrüklə bağlı yeni QƏRAR</h4>
+                                <p><i class="fa fa-calendar"></i>30.09.2020</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =========== logos ============== -->
+        <section class="logo-slider">
+            <div class="container">
+                <ul class="logos overflow-hidden d-flex justify-content-between align-items-center list-unstyled owl-carousel">
+                    <li class="item logo-item"><img src="~/images/koton.png" alt="" class="w-100"></li>
+                    <li class="item logo-item">
+                        <img src="~/images/markafoni.png" alt="" class="w-100">
+                    </li>
+                    <li class="item logo-item"><img src="~/images/n11com.png" alt="" class="w-100"></li>
+                    <li class="item logo-item"><img src="~/images/trendyol.png" alt="" class="w-100"></li>
+                    <li class="item logo-item"><img src="~/images/defacto.png" alt="" class="w-100"></li>
+                    <li class="item logo-item">
+                        <img src="~/images/gitdigidiyor.png" alt="" class="w-100">
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</main>

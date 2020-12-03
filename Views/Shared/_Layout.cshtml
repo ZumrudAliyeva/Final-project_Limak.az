@@ -1,0 +1,326 @@
+﻿@model Final_project_Limak.az.Models.RegisterViewModel
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Final_project_Limak.az</title>
+    <link rel="stylesheet" href="~/lib/bootstrap-4.4.1-dist/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="~/css/owl.theme.default.min.css" />
+
+</head>
+<body>
+    <div class="container-body position-relative">
+        <!-- ========== header navigation bar section ========== -->
+        <div class="container-header">
+            <!-- ============== Mobile header and nav =========================================== -->
+            <header id="mobile-header" class="d-lg-none d-xl-none w-100">
+                <nav class="container nav-top d-flex justify-content-between align-items-center w-100">
+                    <ul class="nav d-flex justify-content-start align-items-center static-nav navbar navbar-expand-lg list-unstyled p-0 mb-0 navbar_left">
+                        <li class="nav_item"><a href="" class="nav_link">Qaydalar</a></li>
+                        <li class="nav_item"><a href="" class="nav_link">Suallar</a></li>
+                        <li class="nav_item"><a href="" class="nav_link">Haqqımızda</a></li>
+                    </ul>
+                    <ul class="nav d-flex justify-content-start align-items-center static-nav navbar navbar-expand-lg list-unstyled p-0 mb-0  navbar_right">
+                        <li class="nav-item position-relative"><a href="" class="login_link nav_link">Daxil ol</a></li>
+                        <li class="nav-item"><a href="Account/Register" class="nav_link">Qeydiyyat</a></li>
+                    </ul>
+                </nav>
+                <nav class="navbar nav-bottom w-100 p-0">
+                    <div class="container h-100">
+                        <ul class="main_logo w-100 d-flex justify-content-between align-items-center static-nav navbar navbar-expand-lg list-unstyled p-0 mb-0 h-100">
+                            <li class="logo nav_item">
+                                <a href="" class="nav_link w-100 d-block">
+                                    <img src="~/images/Limak-Logo.png" alt="">
+                                </a>
+                            </li>
+                            <li class="dropdown nav_item w-50 position-relative d-flex justify-content-end align-items-center">
+                                <a href="" class="nav_link">AZ</a>
+                                <img src="~/images/chevron.png" alt="">
+                                <ul class="dropdown_menu position-absolute list-unstyled">
+                                    <li class="mb-2"><a href="">AZ</a></li>
+                                    <li><a href="">RU</a></li>
+                                </ul>
+                                <img src="~/images/menu-mob.png" alt="" class="ml-5 mr-1">
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <nav class="nav-mobile-menu">
+                    <ul class="d-flex justify-content-between align-items-center mobile_support_ul static-nav navbar navbar-expand-lg list-unstyled p-0 mb-0">
+                        <li class="nav_item tel w-100">
+                            <a href=""
+                               class="nav_link d-flex justify-content-start align-items-center position-relative">
+                                <span class="tel-addr">*9595</span>
+                                <span class="support">
+                                    <p class="mb-0">DƏSTƏK</p>
+                                    <p class="mb-0">XƏTTİ</p>
+                                </span>
+                                <span class="d-block phone-img"><img src="~/images/phone.png" alt=""></span>
+                                <span class="d-block position-absolute close_menu">
+                                    <img src="~/images/close-menu.png" alt="">
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav_item w-100 text-center"><a href="" class="btn-order">SİFARİŞ ET</a></li>
+                    </ul>
+                    <ul class="nav navbar_main text-center static-nav navbar navbar-expand-lg list-unstyled p-0 mb-0 mt-3">
+                        <li class="nav_item d-flex justify-content-start align-items-center w-100">
+                            <a href=""
+                               class="h-100">Ölkələr</a>
+                        </li>
+                        <li class="nav_item d-flex justify-content-start align-items-center w-100">
+                            <a href=""
+                               class="h-100">Kalkulyator</a>
+                        </li>
+                        <li class="nav_item d-flex justify-content-start align-items-center w-100">
+                            <a href=""
+                               class="h-100">Mağazalar</a>
+                        </li>
+                        <li class="nav_item d-flex justify-content-start align-items-center w-100">
+                            <a href=""
+                               class="h-100">Əlaqə</a>
+                        </li>
+                    </ul>
+                    <ul class="mobile list-time list-unstyled">
+                        <li> Bazar ertəsi-şənbə</li>
+                        <li><b>Sifariş et xidməti:</b></li>
+                        <li>24 saat</li>
+                        <li><b>Müştəri xidməti:</b></li>
+                        <li>24 saat</li>
+                        <li><b>Anbar:</b></li>
+                        <li>Saat 10:00`dan - 21:00`a dək</li>
+                    </ul>
+                </nav>
+            </header>
+            <!-- ============= Login and register box =========================================== -->
+            <div class="login-menu-bg">
+                <div class="login-menu-content">
+                    <form asp-action="Login" method="POST" class="h-100">
+                        <button type="button" class="close">
+                            <span aria-hidden="true">
+                                <img src="~/images/close1.png" alt="close" class="">
+                            </span>
+                        </button>
+                        <div class="row h-100">
+                            <div class="login-left col-6 col-sm-6 col-xs-12 h-100">
+                                <h3 class="text-center">Hesaba daxil ol</h3>
+                                <div class="input-group border-radius">
+                                    <input asp-for="Email" name="email" required="" type="text" class="form-control inputText"
+                                           placeholder=" ">
+                                    <span class="input_span">E-mail *</span>
+                                </div>
+                                <div class="input-group border-radius">
+                                    <input asp-for="Password" name="password" required="" type="password" class="form-control inputText"
+                                           placeholder=" ">
+                                    <span class="input_span">Şifrə* </span>
+                                </div>
+                                <div class="save-password">
+                                    <label class="check-button position-relative">
+                                        <span class="pl-4">Yadda saxla</span>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <a href="">Şifrəni unutdum</a>
+                                </div>
+                                <div class="">
+                                    <button type="submit" href="" class="btn-enter btn-password">Daxil ol</button>
+                                    <a asp-action="Register" class="btn-log">Qeydiyyat</a>
+                                </div>
+                            </div>
+                            <div class="login-right col-sm-6 position-relative p-0">
+                                <img src="~/images/pop-back.png" alt="popup"
+                                     class="pop-bg w-100 h-100 img-responsive">
+                                <img src="~/images/popup.png" class="pop-img" alt="pop_back">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- =============== Static header and nav =========================================== -->
+            <header id="static-header" class="static d-lg-block d-md-none d-sm-none w-100">
+                <nav class="container nav-top d-flex justify-content-between align-items-center w-100">
+                    <ul class="nav d-flex justify-content-start align-items-center static-nav navbar navbar-expand-lg list-unstyled p-0 mb-0 navbar_left">
+                        <li class="nav_item"><a href="" class="nav_link">Qaydalar</a></li>
+                        <li class="nav_item"><a href="" class="nav_link">Suallar</a></li>
+                        <li class="nav_item"><a href="" class="nav_link">Haqqımızda</a></li>
+                    </ul>
+                    <ul class="nav d-flex justify-content-start align-items-center static-nav navbar navbar-expand-lg list-unstyled p-0 mb-0  navbar_right">
+                        <li class="nav-item position-relative"><a href="" class="nav_link login_link">Daxil ol</a></li>
+                        <li class="nav-item"><a href="" class="nav_link">Qeydiyyat</a></li>
+                    </ul>
+                </nav>
+                <nav class="navbar nav-bottom w-100 p-0">
+                    <div class="container h-100">
+                        <ul class="main_logo d-flex justify-content-between align-items-center static-nav navbar navbar-expand-lg list-unstyled p-0 mb-0 h-100">
+                            <li class="logo nav_item">
+                                <a href="" class="nav_link w-100 d-block">
+                                    <img src="~/images/Limak-Logo.png" alt="">
+                                </a>
+                            </li>
+                            <li class="dropdown nav_item position-relative d-flex justify-content-between align-items-center">
+                                <a href="" class="nav_link">AZ</a>
+                                <img src="~/images/chevron.png" alt="">
+                                <ul class="dropdown_menu position-absolute list-unstyled">
+                                    <li class="mb-2"><a href="">AZ</a></li>
+                                    <li><a href="">RU</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar_main d-flex justify-content-between align-items-center static-nav navbar navbar-expand-lg list-unstyled p-0 mb-0 h-100">
+                            <li class="nav_item d-flex justify-content-center align-items-center h-100">
+                                <a href=""
+                                   class="h-100">Ölkələr</a>
+                            </li>
+                            <li class="nav_item d-flex justify-content-center align-items-center h-100">
+                                <a href=""
+                                   class="h-100">Kalkulyator</a>
+                            </li>
+                            <li class="nav_item d-flex justify-content-center align-items-center h-100">
+                                <a href=""
+                                   class="h-100">Mağazalar</a>
+                            </li>
+                            <li class="nav_item d-flex justify-content-center align-items-center h-100">
+                                <a href=""
+                                   class="h-100">Əlaqə</a>
+                            </li>
+                        </ul>
+                        <ul class="d-flex justify-content-between align-items-center static-nav navbar navbar-expand-lg list-unstyled p-0 mb-0 h-100">
+                            <li class="nav_item tel">
+                                <a href=""
+                                   class="nav_link d-flex justify-content-start align-items-center position-relative">
+                                    <span class="tel-addr">*9595</span>
+                                    <span>
+                                        <p class="mb-0">DƏSTƏK</p>
+                                        <p class="mb-0">XƏTTİ</p>
+                                    </span>
+                                    <span class="d-block phone-img"><img src="~/images/phone.png" alt=""></span>
+                                </a>
+                            </li>
+                            <li class="nav_item"><a href="" class="btn-order">SİFARİŞ ET</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+        </div>
+        <!-- ========== end of header navigation bar section ========== -->
+        <!-- ========== main section ========== -->
+        <main role="main" class="w-100">
+            @RenderBody()
+        </main>
+        <!-- ========== end of main section ========== -->
+        <!-- ========== footer ========== -->
+        <footer class="w-100">
+            <div class="container-footer">
+                <div class="footer-top">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-3 col-xs-12">
+                                <img src="~/images/logo-white.png" class="img-responsive" alt="logo-white">
+                                <p>
+                                    "Limak VM" MMC&nbsp;sürətli poçtdaşıma və kuryer şirkətidir. Fiziki və hüquqi
+                                    şəxslərin sifariş etdikləri yükləri xaricdəki anbarlarına qəbul edir, onların
+                                    Azərbaycana daşınıb, müştəriyə təhvil verilməsini təmin edir.
+                                </p>
+                                <span class="follow-social">Bizi sosial şəbəkələrdən izləyin</span>
+                                <ul class="social-icons list-unstyled d-flex justify-content-start align-items-center">
+                                    <li>
+                                        <a target="_blank" href="https://www.facebook.com/Limakaz/">
+                                            <i class="fa fa-facebook"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a target="_blank" href="https://www.instagram.com/limak.az/">
+                                            <img src="~/images/instagram.png" alt="instagram">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a target="_blank" href="https://twitter.com/limak_az">
+                                            <img src="~/images/twitter.png" alt="twitter">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <h4>Bölmələr</h4>
+                                <div class="d-flex justify-content-start align-items-center w-100">
+                                    <ul class="menu-list col-4 list-unstyled pl-0">
+                                        <li class="col-12"><a href="https://limak.az/az/countries">Ölkələr</a></li>
+                                        <li class="col-12"><a href="https://limak.az/az/calculator">Kalkulyator</a></li>
+                                        <li class="col-12">
+                                            <a href="https://limak.az/az/shops/country/tr">Mağazalar</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="menu-list col-4 list-unstyled pl-0">
+                                        <li class="col-12"><a href="/az/about-us">Haqqımızda</a></li>
+                                        <li class="col-12"><a href="/az/gizlilik-sertleri">Gizlilik şərtləri</a></li>
+                                        <li class="col-12"><a href="https://limak.az/az/contact">Əlaqə</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-12">
+                                <ul class="text-right list-unstyled">
+                                    <li class="nav_item tel">
+                                        <a href=""
+                                           class="nav_link d-flex justify-content-end align-items-center position-relative">
+                                            <span class="tel-addr">*9595</span>
+                                            <span>
+                                                <p class="m-0">DƏSTƏK</p>
+                                                <p class="m-0">XƏTTİ</p>
+                                            </span>
+                                            <span class="d-block phone-img">
+                                                <img src="~/images/phone.png"
+                                                     alt="">
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        Səbail rayonu, Mehdi Hüseyn küç. 94 <br>(İçərişəhər metrostansiyasının yaxınlığı
+                                        və Təzə Bəy hamamının yanı) Bakı/Azərbaycan
+                                    </li>
+                                    <li><span class="follow-social">Tezliklə</span></li>
+                                    <li class="d-flex justify-content-between align-items-center">
+                                        <a href="https://play.google.com/store/apps/details?id=az.limak" target="_blank"
+                                           class="stores">
+                                            <img src="~/images/google-play.png"
+                                                 alt="google-play">
+                                        </a>
+                                        <a href="#" class="stores">
+                                            <img src="~/images/appstore.png"
+                                                 alt="app-store">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <span>© 2018 Limak.az | Bütün hüquqlar qorunur</span>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12 text-right">
+                                <img src="~/images/visa-logo.png" alt="visa" class="img-responsive">
+                                <img src="~/images/master-card-logo.png" alt="master-card"
+                                     class="img-responsive ml-4">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="~/js/bootstrap-4.4.1-dist/bootstrap.min.js"></script>
+    <script src="~/js/plugins/owl.carousel.min.js"></script>
+    <script src="~/js/carousels.js" asp-append-version="true"></script>
+    <script src="~/js/script.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

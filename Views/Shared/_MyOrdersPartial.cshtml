@@ -1,0 +1,99 @@
+﻿
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<CustomAppUser> signInManager
+@inject UserManager<CustomAppUser> userManager
+@model IEnumerable<Order>
+
+@{ ViewData["Title"] = "UserPanel";}
+
+@{ var user = await userManager.GetUserAsync(User);}
+
+<div class="row userPanelBody declaration-block d-block">
+    @*<div class="col-xs-12 order-body">
+        <div class="block p-0 mb-4">
+            <ul class="nav nav-tabs w-100 justify-content-start">
+                <li class="d-flex justify-content-center align-items-center position-relative active">
+                    <img src="~/images/order-turkey .png" alt="">
+                    <a href="" class="img1 w-100">Türkiyə</a>
+                </li>
+                <li class="d-flex justify-content-center align-items-center position-relative">
+                    <img src="~/images/order-US.png" alt="">
+                    <a href="#tab2" class="img2 w-100">Amerika</a>
+                </li>
+            </ul>
+        </div>
+    </div>*@
+    <div class="col-xs-12" id="tabContent">
+        <div class="block userPanelBlock">
+            <div class="block-head pl-0 pr-0 d-flex justify-content-between align-items-center">
+                <h3 class="col-9 m-0">Sifarişlərim</h3>
+            </div>
+            <div class="block-inner">
+                <div class="select-all mb-3">
+                    <label class="check-button">
+                        <span class="check-text">Hamısını seç</span>
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="declarationsList">
+                    <div class="table-responsive resizable-table">
+                        <table class="table table-bordered w-100">
+                            <thead class="w-100">
+                                <tr>
+                                    <th scope="col">Sifariş Linki</th>
+                                    <th>Türkiyədaxili kargo</th>
+                                    <th>Qeyd</th>
+                                    <th>Miqdar </th>
+                                    <th>Məhsulun qiyməti</th>
+                                    <th>Karqo qiyməti</th>
+                                    <th>Cəm (tl)</th>
+                                    <th>Ödəmə</th>
+                                    <th>Sil</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                    @foreach (var item in Model)
+                    {
+                                <tr scope="row">
+                                    <td class="url" style="table-layout: fixed;">@item.OrderLink</td>
+                                    <td> @if (item.InlandOrNot == true)
+                                    {
+                                        <span>Bəli</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Xeyr</span>
+                                    }
+                                    </td>
+                                    <td> @item.Description</td>
+                                    <td> @item.Quantity</td>
+                                    <td> @item.ProductPrice</td>
+                                    <td> @item.CargoPrice</td>
+                                    <td> @item.PriceResult</td>
+                                    <td>
+                                        @if (item.OrderStatusId == 1)
+                                        {
+                                <a asp-action="PayForOrder" asp-controller="Order" asp-route-id="@item.Id" style="color:white;" class="btn btn-warning mr-1">ÖDƏ</a> }
+
+                            else
+                            {
+
+                                <a href="" style=" cursor: not-allowed;opacity: 0.5;" disabled class="btn btn-primary">Ödənilib</a>}
+                                    </td>
+                                    <td>
+                                        <a asp-action="DeleteOrder" asp-controller="Order" asp-route-id="@item.Id" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete? This action cannot be undone.');">Sil</a>
+                                    </td>
+                                </tr>}}
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

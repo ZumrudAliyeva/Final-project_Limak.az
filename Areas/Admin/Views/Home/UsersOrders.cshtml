@@ -1,0 +1,106 @@
+﻿@model IEnumerable<Limak.az.Models.Order>
+
+@{
+    ViewData["Title"] = "UsersOrders";
+    Layout = "~/Views/Shared/_Layout_areas.cshtml";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                Link
+            </th>
+            <th>
+                Məhsulun qiyməti
+            </th>
+            <th>
+                Karqo qiyməti
+            </th>
+            <th>
+                Cəm
+            </th>
+            <th>
+                Türkiyədaxili karqo
+            </th>
+            <th>
+                Miqdar
+            </th>
+            <th>
+                Qeyd
+            </th>
+            <th>
+                Müştəri kodu
+            </th>
+            <th>
+                Ölkə
+            </th>
+            <th>
+                Çatdırılma ofisi
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @if (item.CountryId == 1)
+                {
+                    <img src="~/images/usa.7b416161.png" /> }
+                else
+                {
+                    <img src="~/images/turkey.png" />}
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderLink)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CargoPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PriceResult)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InlandOrNot)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.CustomerId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Warehouse.Name)
+            </td>
+            <td>
+                @if (item.OrderStatusId == 1)
+                {
+        <a asp-action="CreateDeclaration" asp-route-id="@item.Id" class="btn btn-warning" style="color:white;">Bəyan et<i class="ml-1 fas fa-check"></i></a>}
+
+            </td>
+            <td>
+                <div class="d-flex flex-nowrap">
+                    <a class="btn btn-secondary mr-1 " asp-action="OrderDetails" asp-route-id="@item.Id" asp-controller="Home"><i data-id="@item.Id" class="fas fa-info-circle orderdetailsId"></i></a>
+                    <a asp-action="DeleteOrder" asp-route-id="@item.Id" class="btn btn-danger" data-title="Delete" onclick="return confirm('Are you sure you want to delete? This action cannot be undone.');"><i class="fas fa-trash"></i></a>
+                </div>
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

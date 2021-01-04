@@ -1,4 +1,4 @@
-﻿@model Final_project_Limak.az.Models.RegisterViewModel
+﻿@model Limak.az.Models.CustomAppUser
 
 
 @{
@@ -37,9 +37,9 @@
                         <div class="row">
                             <div class="col-6 col-xs-6 pl-0">
                                 <div class="input-group mb-4">
-                                    <select class="form-control selectpicker d-none" id="country" title="Ölkə">
-                                        <option selected="" value="1">Türkiyə</option>
-                                        <option value="2">Amerika</option>
+                                    <select class="form-control selectpicker d-none" name="country" title="Ölkə">
+                                        <option selected="" value="turkiye">Türkiyə</option>
+                                        <option value="amerika">Amerika</option>
                                     </select>
                                     <button id="country"
                                             class="btn w-100 position-relative btn-default text-left calc_place">
@@ -47,25 +47,29 @@
                                     </button>
                                     <img src="~/images/chevron-small.png" alt=""
                                          class="position-absolute calc-chevron">
-                                    <ul class="dropdown_menu_calc position-absolute list-unstyled">
-                                        <li><a href="" class="d-block w-100">Türkiyə</a></li>
-                                        <li><a href="" class="d-block w-100">Amerika</a></li>
+                                    <ul class="dropdown_menu_calc position-absolute list-unstyled country">
+                                        <li><a href="" class="d-block w-100" data-value="turkiye">Türkiyə</a></li>
+                                        <li><a href="" class="d-block w-100" data-value="amerika">Amerika</a></li>
                                     </ul>
                                 </div>
                                 <div class="input-group mb-4">
                                     <input type="text" name="" id="weight"
-                                           class="form-control inputText position-relative">
-                                    <span class="position-absolute input_span">Çəki</span>
-                                    <div class="input-group-btn">
+                                           class="form-control inputText position-relative" placeholder="Çəki">
+                                    @*<span class="position-absolute input_span">Çəki</span>*@
+                                    <div class="input-group-btn position-absolute h-100" style="top: 0; right: 0;">
+                                        <select class="form-control selectpicker d-none" name="weight" title="Çəki">
+                                            <option selected="" value="kg">kq</option>
+                                            <option value="gr">qr</option>
+                                        </select>
                                         <button id="weight-btn"
-                                                class="btn calc-btn w-100 position-relative btn-default text-left">
+                                                class="btn calc-btn w-100 position-relative btn-default text-left h-100">
                                             kq
                                         </button>
                                         <img src="~/images/chevron-small.png" alt=""
                                              class="position-absolute calc-chevron">
-                                        <ul class="dropdown_menu_calc weight-ul position-absolute list-unstyled">
-                                            <li><a href="" class="d-block w-100">kq</a></li>
-                                            <li><a href="" class="d-block w-100">qram</a></li>
+                                        <ul class="dropdown_menu_calc weight-ul position-absolute list-unstyled w-100 weight" style="top: 38px; right: 0;">
+                                            <li><a href="" class="d-block w-100" data-value="kg">kq</a></li>
+                                            <li><a href="" class="d-block w-100" data-value="gr">qr</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -73,14 +77,19 @@
                                     <input type="text" name="" id=""
                                            class="form-control inputText position-relative">
                                     <span class="position-absolute input_span">En</span>
-                                    <div class="input-group-btn">
-                                        <button id="weight-btn"
-                                                class="btn calc-btn w-100 position-relative btn-default text-left">
+                                    <div class="input-group-btn position-absolute h-100" style="top: 0; right: 0">
+                                        <select class="form-control selectpicker d-none" name="weight" title="En">
+                                            <option selected="" value="sm">sm</option>
+                                            <option value="dm">dm</option>
+                                            <option value="m">m</option>
+                                        </select>
+                                        <button id=""
+                                                class="btn calc-btn w-100 position-relative btn-default text-left h-100">
                                             sm
                                         </button>
                                         <img src="~/images/chevron-small.png" alt=""
                                              class="position-absolute calc-chevron">
-                                        <ul class="dropdown_menu_calc width_ul position-absolute list-unstyled">
+                                        <ul class="dropdown_menu_calc width_ul position-absolute list-unstyled w-100 weight" style="top: 38px; right: 0;">
                                             <li><a href="" class="d-block w-100">sm</a></li>
                                             <li><a href="" class="d-block w-100">dm</a></li>
                                             <li><a href="" class="d-block w-100">m</a></li>
@@ -91,14 +100,14 @@
                                     <input type="text" name="" id=""
                                            class="form-control inputText position-relative">
                                     <span class="position-absolute input_span">Hündürlük</span>
-                                    <div class="input-group-btn">
-                                        <button id="weight-btn"
-                                                class="btn calc-btn w-100 position-relative btn-default text-left">
+                                    <div class="input-group-btn position-absolute h-100" style="top: 0; right: 0;">
+                                        <button id=""
+                                                class="btn calc-btn w-100 position-relative btn-default text-left h-100">
                                             sm
                                         </button>
                                         <img src="~/images/chevron-small.png" alt=""
                                              class="position-absolute calc-chevron">
-                                        <ul class="dropdown_menu_calc width_ul position-absolute list-unstyled">
+                                        <ul class="dropdown_menu_calc width_ul position-absolute list-unstyled weight">
                                             <li><a href="" class="d-block w-100">sm</a></li>
                                             <li><a href="" class="d-block w-100">dm</a></li>
                                             <li><a href="" class="d-block w-100">m</a></li>
@@ -109,7 +118,7 @@
                             <div class="col-6 col-xs-6 pr-0">
                                 <div class="input-group mb-4">
                                     <button id="city"
-                                            class="btn w-100 position-relative btn-default text-left calc_place">
+                                            class="btn w-100 position-relative btn-default text-left calc_place h-100">
                                         Bakı
                                     </button>
                                     <img src="~/images/chevron-small.png" alt=""
@@ -122,22 +131,22 @@
                                     </ul>
                                 </div>
                                 <div class="input-group mb-4">
-                                    <input type="text" name="" id="count_pack"
-                                           class="form-control inputText position-relative">
-                                    <span class="position-absolute input_span">Bağlama sayı</span>
+                                    <input type="number" min="1" name="" id="count_pack"
+                                           class="form-control inputText position-relative" placeholder="Bağlama sayı">
+                                    @*<span class="position-absolute input_span">Bağlama sayı</span>*@
                                 </div>
                                 <div class="input-group mb-4">
                                     <input type="text" name="" id=""
                                            class="form-control inputText position-relative">
                                     <span class="position-absolute input_span">Uzunluq</span>
-                                    <div class="input-group-btn">
+                                    <div class="input-group-btn position-absolute h-100" style="top: 0; right: 0">
                                         <button id=""
-                                                class="btn calc-btn w-100 position-relative btn-default text-left">
+                                                class="btn calc-btn w-100 position-relative btn-default text-left h-100">
                                             sm
                                         </button>
                                         <img src="~/images/chevron-small.png" alt=""
                                              class="position-absolute calc-chevron">
-                                        <ul class="dropdown_menu_calc length_ul position-absolute list-unstyled">
+                                        <ul class="dropdown_menu_calc length_ul position-absolute list-unstyled" style="top: 38px; right: 0;">
                                             <li><a href="" class="d-block w-100">sm</a></li>
                                             <li><a href="" class="d-block w-100">dm</a></li>
                                             <li><a href="" class="d-block w-100">m</a></li>
@@ -150,7 +159,7 @@
                             </div>
                         </div>
                         <div class="col-12 col-xs-12 p-0">
-                            <p class="count">Cəmi: <b class="all_count">$0,00</b></p>
+                            <p class="count">Cəmi: <b class="all_count" id="priceResult">0,00</b></p>
                         </div>
                     </div>
                 </div>

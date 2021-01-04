@@ -1,0 +1,67 @@
+﻿@model Limak.az.ViewModels.DeclarationViewModel
+
+@{
+    ViewData["Title"] = "CreateDeclaration";
+    Layout = "~/Views/Shared/_Layout_areas.cshtml";
+}
+<div class="row d-flex justify-content-center align-items-center">
+    <div class="col-md-4 pt-4 mt-4">
+        <form asp-action="CreateDeclaration">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <select class="form-control" asp-for="DeclarationStatusId" asp-items="@ViewBag.Status">
+                    <option>-----</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Mağaza</label>
+                <input asp-for="Shop" class="form-control" />
+                <span asp-validation-for="Shop" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Məhsulun növü</label>
+                <input asp-for="ProductType" class="form-control" />
+                <span asp-validation-for="ProductType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Miqdar</label>
+                <input asp-for="Quantity" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Məhsulun qiyməti</label>
+                <input asp-for="ProductPrice" class="form-control" />
+                <span asp-validation-for="ProductPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Link" class="control-label"></label>
+                <input asp-for="Link" class="form-control" />
+                <span asp-validation-for="Link" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Qeyd</label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Çatdırılma qiyməti</label>
+                <input asp-for="ShippingPrice" class="form-control" />
+                <span asp-validation-for="ShippingPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Məhsulun çəkisi</label>
+                <input asp-for="ProductWeight" class="form-control" />
+                <span asp-validation-for="ProductWeight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Invoys</label>
+                <input type="file" asp-for="File" class="form-control" />
+                <span asp-validation-for="File" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Əlavə et" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+

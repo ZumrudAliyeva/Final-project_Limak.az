@@ -1,0 +1,361 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<CustomAppUser> signInManager
+@inject UserManager<CustomAppUser> userManager
+@model Limak.az.Models.UserBalance
+
+@{ var user = await userManager.GetUserAsync(User);
+    var displayName = "";
+    var customerId = ""; }
+
+@{ ViewData["Title"] = "UserPanel";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+@if (signInManager.IsSignedIn(User))
+{
+    customerId = user.CustomerId;
+}
+
+<div class="user-panel w-100">
+    <div class="container p-0">
+        <div class="row">
+            <div class="page-head p-0 col-12 col-xs-12 d-flex justify-content-between align-items-center">
+                <div class="col-3 col-md-3 col-sm-6 col-xs-6 pl-0 pr-0">
+                    <h4 class="mb-0">İSTİFADƏÇİ <b>PANELİ</b></h4>
+                </div>
+                <div class="col-9 col-md-9 col-sm-6 col-xs-6 pr-0 d-flex justify-content-between align-items-center">
+                    <span class="user-code">MÜŞTƏRİ KODU: <b>@customerId</b></span>
+                    <ul class="breadcrumb list-unstyled d-flex justify-content-end">
+                        <li class="pr-2"><a href="/">Ana səhifə /</a></li>
+                        <li class="pr-2">İstifadəçi paneli</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-page p-0 col-12 col-xs-12">
+                <div class="row relative w-100">
+                    <div class="col-3 col-md-3 col-sm-1 col-xs-1 pl-0">
+                        <div class="block left-side pl-0 pr-0">
+                            <ul class="left-sidebar userPanelList list-unstyled p-0 m-0 w-100">
+                                <li class="active">
+                                    <a href="#" class="panel-img">
+                                        <span> Panel səhifəsi</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="address">
+                                        <span>Xaricdəki ünvanlarım</span>
+                                    </a>
+                                </li>
+                                <li data-index="orders">
+                                    <a href="#" class="basket">
+                                        <span>Sifarişlərim</span>
+                                    </a>
+                                </li>
+                                <li class="router-link-exact-active" data-index="declarations">
+                                    <a href="#" class="package">
+                                        <span>Bağlamalarım</span>
+                                    </a>
+                                </li>
+                                <li data-index="balanceAZN">
+                                    <a href="#" class="coin">
+                                        <span>AZN Balansım</span>
+                                    </a>
+                                </li>
+                                <li data-index="balanceTL">
+                                    <a href="#" class="coin">
+                                        <span>TL Balansım</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" class="courier">
+                                        <span>Kuryer</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="offer">
+                                        <span>
+                                            Sorğu <span>(0)</span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="settings">
+                                        <span>Tənzimləmələr</span>
+                                    </a>
+                                </li>
+                                <br>
+                                <li>
+                                    <a asp-action="LogOut" asp-controller="Account" class="logout">
+                                        <span>Hesabdan çıx</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="block price">
+                            <div>
+                                <h4>Məzənnə kalkulyatoru</h4>
+                                <form action="">
+                                    <div class="input-group border-radius d-flex">
+                                        <input type="number" placeholder="0"
+                                               class="form-control mr-4 inputText col-8">
+                                        <div class="dropdown v-select single searchable col-4 p-0">
+                                            <select class="form-control dropdown-toggle inputText p-0 tag">
+                                                <option value="">AZN</option>
+                                                <option value="">USD</option>
+                                                <option value="">TRY</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="input-group border-radius d-flex">
+                                        <input type="number" placeholder="0"
+                                               class="form-control mr-4 inputText col-8">
+                                        <div class="dropdown v-select single searchable col-4 p-0">
+                                            <select class="form-control dropdown-toggle inputText p-0 tag">
+                                                <option value="">AZN</option>
+                                                <option value="">USD</option>
+                                                <option value="">TRY</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+                                <span>Günün məzənnəsinə uyğun hesablanır.</span>
+                            </div>
+                        </div>
+                        <div class="block daily">
+                            <div>
+                                <h4>Günlük məzənnə</h4>
+                                <ul>
+                                    <li>
+                                        <img src="asserts/images/flg-tr.png" alt="">
+                                        <span>1</span>
+                                        <span>TL</span>
+                                    </li>
+                                    <li>
+                                        <img src="asserts/images/flg-az.png" alt="">
+                                        <span>0.556</span>
+                                        <span>AZN</span>
+                                    </li>
+                                    <li>
+                                        <img src="asserts/images/flg-usa.png" alt="">
+                                        <span>0.5814</span>
+                                        <span>USD</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-9 col-md-9 col-sm-11 col-xs-11 pr-0 package basket panel_tab_content">
+                        @{ if (TempData["message"] != null)
+                                        {
+
+                            <section class="register p-4" style="margin: auto;">
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-8 justify-content-center " style="color: #333;box-sizing: border-box;
+                                            background-color: #fff; padding: 14px 24px;text-align: center;">
+                                            <p style="line-height:1.6;font-size:16px;">
+                                                @TempData["message"]
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section> } }
+                        <div class="mydeclarationsList tabContent d-none" data-index="declarations"></div>
+                        <div class="myordersList tabContent d-none" data-index="orders"></div>
+                        <div class="mybalanceListAZN tabContent" data-index="balanceAZN">
+                            <div class="row userPanelBody  balance-block">
+                                <div class="col-xs-12 block userPanelBlock row d-flex flex-wrap p-0">
+                                    <div class="col-5 col-md-5 col-sm-5 col-xs-12 p-0">
+                                        <div class="balance">
+                                            <img src="~/images/balans-mob.png" alt="balans"
+                                                 class="img-responsive w-100 h-100">
+                                            <div class="balance-count">
+                                                <span>Balansım</span><br><span class="count">@ViewBag.BalanceAZN<sup>₼</sup></span>
+                                            </div>
+                                            <div class="balance-date">
+                                                <span>Son əlavə tarixi</span><br>
+                                            </div>
+                                            <div class="balance-text">
+                                                Azərbaycana çatdırılma haqqının ödənilməsi və online kuryer
+                                                sifarişi üçün balansınızı artıra bilərsiniz.
+                                                <p class="mb-0 mt-2 w-100">
+                                                    <b>ARTIRILAN BALANS GERİ QAYTARILMIR.</b>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-7 col-md-7 col-sm-7 col-xs-12 right-side rightBalance pr-0">
+                                        <div class="right-top block">
+                                            <h4>ÖDƏNİŞ ÜÇÜN BALANS ARTIMI</h4>
+                                            <form method="POST" asp-action="IncreaseBalanceAzn" asp-controller="Balance">
+                                                <div class="border-radius d-flex justify-content-between align-items-center">
+                                                    <div class="input-group increaseDiv mb-0 mr-3">
+                                                        <label class="lbl_pay mb-0">
+                                                            <input type="hidden" value="3" asp-for="CurrencyId" />
+                                                            <input placeholder="Məbləğ AZN" name="amount" step=".01" min="1" max="1000" required="required" type="number"
+                                                                   class="form-control inputText">
+                                                            @*<span class="input_span">Məbləğ AZN</span>*@
+                                                        </label>
+                                                    </div>
+                                                    @*<div class="input-group increaseDiv mb-0 mr-3">
+                                        <label class="lbl_pay mb-0">
+                                            <input placeholder=" " required="required" type="number"
+                                                   name="amount" readonly="readonly"
+                                                   class="form-control inputText">
+                                            <span class="input_span">Məbləğ AZN</span>
+                                        </label>
+                                    </div>*@
+                                                    <input type="submit"
+                                                            class="border-btn btn-effect btn_pay  increaseDiv ml-4" value="Balansı artır"/>
+                                                </div>
+                                            </form>
+                                            <div class="d-flex justify-content-between align-items-center mb-3 mt-4">
+                                                <span class="range-count">min: 1 AZN - max: 1000 AZN</span>
+                                                <div class="card_logolist">
+                                                    <img src="~/images/visa-logo-master.png" alt=" visa">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 p-0 increase-balance">
+                                        <div class="col-xs-12">
+                                            <div class="block d-flex">
+                                                <div class="col-md-10 col-sm-9 col-xs-9">
+                                                    <h4>Milli Ön üzərindən balansınızı artırın</h4>
+                                                    <form>
+                                                        <div class="input-group border-radius mb-4 mt-4">
+                                                            <label>
+                                                                <input type="text" placeholder="Hesab Nömrəsi: "
+                                                                       readonly="readonly"
+                                                                       class="form-control inputText">
+                                                            </label>
+                                                        </div>
+                                                    </form>
+                                                    <p>
+                                                        MilliÖN terminalına yaxınlaşırsınız, "Çatdırılma xidməti"
+                                                        bölməsinə daxil olub, "Limak.az" bölməsinə keçid edirsiniz.
+                                                        Daşınma və kuryer xidmət haqqını ödəyə bilmək üçün "limak.az
+                                                        AZN" xanasını seçirsiniz. Açılan xanada yuxarıdakı hesab
+                                                        nömrənizi yığaraq "davam et" düyməsini sıxırsınız.
+                                                        Çatdırılma və kuryer xidməti üçün lazım olan məbləği daxil
+                                                        edib təsdiqləyirsiniz. Əməliyyatı bitirdikdən sonra məbləğ
+                                                        dərhal limak.az saytındakı şəxsi kabinetdəki balansınızda
+                                                        görünəcək.
+                                                        <br><br>
+                                                        Qeyd: Çatdırılma balansı ilə Türkiyədən alış-veriş etmək
+                                                        mümkün deyil! AZN balansından TRY balansına pul transferi
+                                                        mümkün deyil!
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-2 col-sm-3 col-xs-3">
+                                                    <img src="~/images/terminal.png" alt="terminal"
+                                                         class="img-responsive center-block">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mybalanceListTL tabContent d-none" data-index="balanceTL">
+                            <div class="row userPanelBody  balance-block">
+                                <div class="col-xs-12 block userPanelBlock row d-flex flex-wrap p-0">
+                                    <div class="col-5 col-md-5 col-sm-5 col-xs-12 p-0">
+                                        <div class="balance">
+                                            <img src="~/images/balans-mob.png" alt="balans"
+                                                 class="img-responsive w-100 h-100">
+                                            <div class="balance-count">
+                                                <span>Balansım</span><br><span class="count">@ViewBag.BalanceTRY <sup>tl</sup></span>
+                                            </div>
+                                            <div class="balance-date">
+                                                <span>Son əlavə tarixi</span><br>
+                                            </div>
+                                            <div class="balance-text">
+                                                Azərbaycana çatdırılma haqqının ödənilməsi və online kuryer
+                                                sifarişi üçün balansınızı artıra bilərsiniz.
+                                                <p class="mb-0 mt-2 w-100">
+                                                    <b>ARTIRILAN BALANS GERİ QAYTARILMIR.</b>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-7 col-md-7 col-sm-7 col-xs-12 right-side rightBalance pr-0">
+                                        <div class="right-top block">
+                                            <h4>ÖDƏNİŞ ÜÇÜN BALANS ARTIMI</h4>
+                                            <form method="POST" asp-action="IncreaseBalanceTl" asp-controller="Balance">
+                                                <div class="border-radius d-flex justify-content-between align-items-center">
+                                                    <div class="input-group increaseDiv mb-0 mr-3">
+                                                        <input type="hidden" value="2" asp-for="CurrencyId" />
+                                                        <label class="lbl_pay mb-0">
+                                                            <input placeholder="Məbləğ TL" name="amount" step=".01" min="1" max="1000" required="required" type="number"
+                                                                   class="form-control inputText">
+                                                            @*<span class="input_span">Məbləğ TL</span>*@
+                                                        </label>
+                                                    </div>
+                                                    @*<div class="input-group increaseDiv mb-0 mr-3">
+                                        <label class="lbl_pay mb-0">
+                                            <input placeholder=" " required="required" type="number"
+                                                   name="amount" readonly="readonly"
+                                                   class="form-control inputText">
+                                            <span class="input_span">Məbləğ AZN</span>
+                                        </label>
+                                    </div>*@
+                                                <input type="submit"
+                                                       class="border-btn btn-effect btn_pay  increaseDiv ml-4" value="Balansı artır" />
+                                                </div>
+                                            </form>
+                                            <div class="d-flex justify-content-between align-items-center mb-3 mt-4">
+                                                <span class="range-count">min: 1 TL - max: 1000 TL</span>
+                                                <div class="card_logolist">
+                                                    <img src="~/images/visa-logo-master.png" alt=" visa">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 p-0 increase-balance">
+                                        <div class="col-xs-12">
+                                            <div class="block d-flex">
+                                                <div class="col-md-10 col-sm-9 col-xs-9">
+                                                    <h4>Milli Ön üzərindən balansınızı artırın</h4>
+                                                    <form>
+                                                        <div class="input-group border-radius mb-4 mt-4">
+                                                            <label>
+                                                                <input type="text" placeholder="Hesab Nömrəsi: "
+                                                                       readonly="readonly"
+                                                                       class="form-control inputText">
+                                                            </label>
+                                                        </div>
+                                                    </form>
+                                                    <p>
+                                                        MilliÖN terminalına yaxınlaşırsınız, "Çatdırılma xidməti"
+                                                        bölməsinə daxil olub, "Limak.az" bölməsinə keçid edirsiniz.
+                                                        Daşınma və kuryer xidmət haqqını ödəyə bilmək üçün "limak.az
+                                                        AZN" xanasını seçirsiniz. Açılan xanada yuxarıdakı hesab
+                                                        nömrənizi yığaraq "davam et" düyməsini sıxırsınız.
+                                                        Çatdırılma və kuryer xidməti üçün lazım olan məbləği daxil
+                                                        edib təsdiqləyirsiniz. Əməliyyatı bitirdikdən sonra məbləğ
+                                                        dərhal limak.az saytındakı şəxsi kabinetdəki balansınızda
+                                                        görünəcək.
+                                                        <br><br>
+                                                        Qeyd: Çatdırılma balansı ilə Türkiyədən alış-veriş etmək
+                                                        mümkün deyil! AZN balansından TRY balansına pul transferi
+                                                        mümkün deyil!
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-2 col-sm-3 col-xs-3">
+                                                    <img src="~/images/terminal.png" alt="terminal"
+                                                         class="img-responsive center-block">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

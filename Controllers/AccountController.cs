@@ -1,32 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
-using Final_project_Limak.az.Contexts;
-using Final_project_Limak.az.Models;
+using AutoMapper;
+using Limak.az.Contexts;
+using Limak.az.Interfaces;
+using Limak.az.Models;
+using Limak.az.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace Final_project_Limak.az.Controllers
+namespace Limak.az.Controllers
 {
     public class AccountController : Controller
     {
+        #region fields and ctor
+
+        private readonly IMapper _mapper;
+        private readonly IUserRepository _userRepository;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly LimakDbContext _db;
         private readonly UserManager<CustomAppUser> userManager;
         private readonly SignInManager<CustomAppUser> signInManager;
         private readonly ILogger<AccountController> logger;
-        private readonly CustomAppDbContext context;
 
-        public AccountController(UserManager<CustomAppUser> userManager,
-            SignInManager<CustomAppUser> signInManager, ILogger<AccountController> logger)
+        public AccountController(IMapper mapper, IUserRepository userRepository, RoleManager<IdentityRole> roleManager,
+            LimakDbContext db, UserManager<CustomAppUser> userManager, SignInManager<CustomAppUser> signInManager, ILogger<AccountController> logger)
         {
+            _mapper = mapper;
+            _userRepository = userRepository;
+            _roleManager = roleManager;
+            _db = db;
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.logger = logger;
         }
+
+        #endregion
 
         public IActionResult Index()
         {
@@ -40,38 +53,17 @@ namespace Final_project_Limak.az.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
-        public async Task<IActionResult> Register(RegisterViewModel registerView, string returnUrl)
+        public async Task<IActionResult> Register(RegisterViewModel userViewModel)
         {
             if (ModelState.IsValid)
             {
-                CustomAppUser user = new CustomAppUser()
-                {
-                    
-                    Name = registerView.Name,
-                    UserName = registerView.Name,
-                    Surname = registerView.Surname,
-                    Email = registerView.Email,
-                    PhoneNumber = registerView.Phone,
-                    IDSerialNumber = registerView.IDSerialNumber,
-                    Citizenship = registerView.Citizenship,
-                    FINkode = registerView.FINkode,
-                    Birthday = registerView.Birthday,
-                    Birthmonth = registerView.Birthmonth,
-                    Birthyear = registerView.Birthyear,
-                    Gender = registerView.Gender,
-                    Address = registerView.Address
-                };
-
-                var result = userManager.CreateAsync(user, registerView.Password).Result;
+                var result = await _userRepository.Create(userViewModel);
 
                 if (result.Succeeded)
                 {
-                    var emailConfirmationToken = await userManager.GenerateEmailConfirmationTokenAsync(user);
-
-                    var confirmationLink = Url.Action("ConfirmEmail", "Account",
-                   new { userId = user.Id, emailConfirmationToken = emailConfirmationToken }, Request.Scheme);
-
+                    var user = await _db.Users.FirstOrDefaultAsync(x => x.Email == userViewModel.Email);
+                    var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var confirmationLink = Url.Action("ConfirmEmail", "Account", new { email = user.Email, emailConfirmationToken = token }, Request.Scheme);
                     logger.Log(LogLevel.Warning, confirmationLink);
 
                     //send confirmation link by smtp//
@@ -80,121 +72,155 @@ namespace Final_project_Limak.az.Controllers
                     client.UseDefaultCredentials = false;
                     client.Credentials = new NetworkCredential("limakmmc.test@gmail.com", "Password_1303");
 
-                    MailMessage message = new MailMessage(new MailAddress("limakmmc.test@gmail.com"), new MailAddress(registerView.Email));
+                    MailMessage message = new MailMessage(new MailAddress("limakmmc.test@gmail.com"), new MailAddress(userViewModel.Email));
                     client.EnableSsl = true;
                     message.IsBodyHtml = true;
                     message.Subject = "Email Confirmation";
                     client.TargetName = "Limak MMC";
 
-                    message.Body = @"<html><body><p><strong><div><div>Hi Sir/ Madam. We just need to verify your Email address for complete your registration!<br>click here <a href='https://localhost:44380/Account/ConfirmEmail?userId={user.Id}&emailConfirmationToken={emailConfirmationToken}'>Hesabını təsdiqlə</a></div></div></strong></p></body></html>";
+                    message.Body = "<form action='" + confirmationLink + "'>" +
+                        "<input name='Token' value='" + token + "' type='hidden'/>" +
+                        "<input name='Email' value='" + user.Email + "' type='hidden'/>" +
+                       " <div style = 'width: 600px; display: flex; align-items: center; justify-content: center;' >" +
+                       " <div style ='font-size: 15px;text-align: center;'>" +
+                        "<h3> Qeydiyyatınızı təsdiqləyin</h3>" +
+                       " <p> Hörmətli  " + userViewModel.Name + " " + userViewModel.Surname + ", </p> " +
+                       "<p>Limak.az saytındakı qeydiyyatınızı təsdiqləmək üçün zəhmət olmasa klikləyin.</p> " +
+                        "<input style='cursor: pointer; font-weight: 800; font-size: 16px; color: white; background-color: #005eb5cc; padding: 14px 24px; border-radius: 5px; border: #005eb5cc;'  type='submit' value='EmailConfrimation'/></form>" +
+                     " </div> </div>";
 
                     await client.SendMailAsync(message);
-                    //send confirmation link by smtp//
-
-
-                    //if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                    //{
-                    //    return RedirectToAction("ListUsers", "Admin");
-                    //}
-
-                    //ViewBag.ErrorTitle = "Registration successful";
-                    //ViewBag.ErrorMessage = "Before you can Login, please confirm your " +
-                    //        "email, by clicking on the confirmation link we have emailed you";
-                    //return View("Error");
-
                 }
                 else
                 {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError(string.Empty, error.Description);
-                    }
+                    ModelState.AddModelError(string.Empty, "Emeliyyat ugursuzdur!");
                 }
-            }
 
-            return View(registerView);
+            }
+            return View(userViewModel);
         }
 
+
         [AllowAnonymous]
-        public async Task<IActionResult> ConfirmEmail(string userId, string emailConfirmationToken)
+        public async Task<IActionResult> ConfirmEmail(string email, string token)
         {
-            if (userId == null || emailConfirmationToken == null)
+            if (email == null || token == null)
             {
                 return View("Error");
             }
 
-            CustomAppUser user = await userManager.FindByIdAsync(userId);
+            var user = await _db.Users.FirstOrDefaultAsync(x => x.Email == email);
+
             if (user == null)
             {
-                return View("Error");
+                TempData["Message"] = "Email yanlishdir";
+                return RedirectToAction("Logout", "Account");
             }
-
-            var result = await userManager.ConfirmEmailAsync(user, emailConfirmationToken);
+            var result = await userManager.ConfirmEmailAsync(user, token);
             if (result.Succeeded)
             {
                 user.EmailConfirmed = true;
-
                 return RedirectToAction("Index", "Home");
             }
 
-            return View("Error");
+            TempData["Message"] = "Email yanlishdir";
+            return RedirectToAction("Logout", "Account");
         }
 
 
         [HttpGet]
-        public IActionResult Login(LoginViewModel loginView)
+        public IActionResult Login()
         {
-            return View(loginView);
+            return PartialView("_LoginPartial");
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(RegisterViewModel subViewModel, string returnUrl)
+        public async Task<IActionResult> Login(LoginViewModel loginViewModel)
         {
-
             if (ModelState.IsValid)
             {
-                var user = await userManager.FindByEmailAsync(subViewModel.Email);
-
-                if (user != null && !user.EmailConfirmed &&
-                            (await userManager.CheckPasswordAsync(user, subViewModel.Password)))
+                await signInManager.SignOutAsync();
+                var user = await _db.Users.FirstOrDefaultAsync(x => x.Email == loginViewModel.Email);
+                if (user != null)
                 {
-                    ModelState.AddModelError(string.Empty, "Email not confirmed yet");
-                    return View(subViewModel);
-                }
-
-                var result = await signInManager.PasswordSignInAsync(
-                    subViewModel.Email,
-                    subViewModel.Password,
-                    subViewModel.LoginViewModel.RememberMe,
-                    false);
-
-                if (result.Succeeded)
-                {
-                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    if (user.EmailConfirmed == true)
                     {
-                        return Redirect(returnUrl);
+                        var result = await _userRepository.Login(loginViewModel);
+
+                        if (result.Succeeded)
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
+
+                        else
+                        {
+                            ModelState.AddModelError(string.Empty, "Email və ya şifrə yanlışdır");
+                        }
                     }
                     else
                     {
-                        return RedirectToAction("index", "home");
+                        ModelState.AddModelError(string.Empty, "Email və ya şifrə yanlışdır");
                     }
                 }
+
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
+                    ModelState.AddModelError(string.Empty, "Email yanlışdır");
                 }
             }
-
-            return View(subViewModel);
+            return PartialView("_LoginPartial", loginViewModel);
         }
+
 
         [HttpGet]
         public IActionResult LogOut()
         {
             signInManager.SignOutAsync();
-            return RedirectToAction("Login", "Account");
+            return RedirectToAction("Index", "Home");
         }
 
+        public IActionResult Settings(string id)
+        {
+            var user = _db.Users.FirstOrDefault(x => x.Id == id);
+            SettingsViewModel settingsViewModel = new SettingsViewModel();
+            settingsViewModel = _mapper.Map<SettingsViewModel>(user);
+            return View(settingsViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Settings(SettingsViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _userRepository.Update(viewModel);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Error");
+                }
+
+            }
+            return View(viewModel);
+        }
+
+        //public static string GetRandomPassword()
+        //{
+        //    string chars = "0123456789";
+
+        //    StringBuilder sb = new StringBuilder();
+        //    Random random = new Random();
+
+        //    for (int i = 0; i < 7; i++)
+        //    {
+        //        int index = random.Next(chars.Length);
+        //        sb.Append(chars[index]);
+        //    }
+
+        //    return sb.ToString();
+        //}
 
     }
 }

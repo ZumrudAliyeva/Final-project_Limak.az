@@ -1,8 +1,93 @@
-﻿@model Final_project_Limak.az.Models.RegisterViewModel
+﻿@model Limak.az.ViewModels.RegisterViewModel
+
+@{
+    //ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<h1>Register</h1>
+
+    <h4>RegisterViewModel</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Register">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Surname" class="control-label"></label>
+                    <input asp-for="Surname" class="form-control" />
+                    <span asp-validation-for="Surname" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Phone" class="control-label"></label>
+                    <input asp-for="Phone" class="form-control" />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ConfirmPassword" class="control-label"></label>
+                    <input asp-for="ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IDSerialNumber" class="control-label"></label>
+                    <input asp-for="IDSerialNumber" class="form-control" />
+                    <span asp-validation-for="IDSerialNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Citizenship" class="control-label"></label>
+                    <input asp-for="Citizenship" class="form-control" />
+                    <span asp-validation-for="Citizenship" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Birthdate" class="control-label"></label>
+                    <input asp-for="Birthdate" class="form-control" autocomplete="off"  type="text" onfocus="(this.type='date')" />
+                    <span asp-validation-for="Birthdate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Gender" class="control-label"></label>
+                    <input asp-for="Gender" class="form-control" />
+                    <span asp-validation-for="Gender" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FINkode" class="control-label"></label>
+                    <input asp-for="FINkode" class="form-control" />
+                    <span asp-validation-for="FINkode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Address" class="control-label"></label>
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>*@
+
+
 
 <main class="w-100">
     <div class="container-main w-100">
-        <!-- =============== breadcrumbs ================= -->
         <section class="w-100">
             <div class="breadcrumb container d-flex justify-content-between align-items-center">
                 <div class="col-4 col-md-4 col-sm-5 col-xs-6">
@@ -16,7 +101,6 @@
                 </div>
             </div>
         </section>
-        <!-- ==== registration ================= -->
         <section class="registration_container">
             <div class="container p-0">
                 <div class="row">
@@ -30,15 +114,15 @@
                                 <div class="col-xs-6 col-6 pl-0">
                                     <div class=" input-group">
                                         <input asp-for="Name" value="" type="text" class="form-control inputText"
-                                               placeholder=" ">
-                                        <span class="input_span">Ad * </span>
+                                               placeholder=" Ad * ">
+                                        @*<span class="input_span">Ad * </span>*@
                                     </div>
                                 </div>
                                 <div class="col-xs-6 col-6 pr-0">
                                     <div class=" input-group">
                                         <input asp-for="Surname" value="" type="text"
-                                               class="form-control inputText" placeholder=" ">
-                                        <span class="input_span">Soyad *</span>
+                                               class="form-control inputText" placeholder="Soyad * ">
+                                        @*<span class="input_span">Soyad *</span>*@
                                     </div>
                                 </div>
                             </div>
@@ -46,16 +130,16 @@
                                 <div class="col-xs-6 col-6 pl-0">
                                     <div class=" input-group">
                                         <input asp-for="Email" value="" type="text" class="form-control inputText"
-                                               placeholder=" ">
-                                        <span class="input_span">E-mail * </span>
+                                               placeholder="E-mail * ">
+                                        @*<span class="input_span">E-mail * </span>*@
                                     </div>
                                 </div>
                                 <div class="col-xs-6 col-6 pr-0">
                                     <div class=" input-group tel-edit">
                                         <input asp-for="Phone" value="" type="text" class="form-control inputText"
-                                               placeholder=" ">
-                                        <span class="input_span">Telefon *</span>
-                                        <p class="input_span">+994</p>
+                                               placeholder="Telefon * ">
+                                        @*<span class="input_span">Telefon *</span>*@
+                                        @*<p class="input_span">+994</p>*@
                                     </div>
                                 </div>
                             </div>
@@ -63,15 +147,15 @@
                                 <div class="col-xs-6 col-6 pl-0">
                                     <div class=" input-group">
                                         <input asp-for="Password" value="" type="password"
-                                               class="form-control inputText" placeholder=" ">
-                                        <span class="input_span">Şifrə *</span>
+                                               class="form-control inputText" placeholder=" Şifrə *">
+                                        @*<span class="input_span">Şifrə *</span>*@
                                     </div>
                                 </div>
                                 <div class="col-xs-6 col-6 pr-0">
                                     <div class=" input-group">
                                         <input asp-for="ConfirmPassword" value="" type="password"
-                                               class="form-control inputText" placeholder=" ">
-                                        <span class="input_span">Şifrənin təkrarı *</span>
+                                               class="form-control inputText" placeholder="Şifrənin təkrarı *">
+                                        @*<span class="input_span">Şifrənin təkrarı *</span>*@
                                     </div>
                                 </div>
                             </div>
@@ -82,15 +166,15 @@
                                 <div class="col-xs-6 col-6 pl-0">
                                     <div class=" input-group">
                                         <input asp-for="IDSerialNumber" value="" type="text"
-                                               class="form-control inputText" placeholder=" ">
-                                        <span class="input_span">Seriya nömrəsi *</span>
+                                               class="form-control inputText" placeholder=" Seriya nömrəsi *">
+                                        @*<span class="input_span">Seriya nömrəsi *</span>*@
                                     </div>
                                 </div>
                                 <div class="col-xs-6 col-6 pr-0">
                                     <div class=" input-group">
                                         <input asp-for="Citizenship" value="" type="text"
-                                               class="form-control inputText" placeholder=" ">
-                                        <span class="input_span">Vətəndaşlıq *</span>
+                                               class="form-control inputText" placeholder=" Vətəndaşlıq *">
+                                        @*<span class="input_span">Vətəndaşlıq *</span>*@
                                     </div>
                                 </div>
                             </div>
@@ -101,92 +185,14 @@
                                     </div>
                                 </div>
                                 <div class="col-12 p-0 d-flex">
-                                    <div class=" invoice-day input-group col-3 pl-0">
-                                        <select asp-for="Birthday" class="form-control selectpicker d-none" title="Gün">
-                                            <option class="bs-title-option" value=""></option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                        </select>
-                                        <button id="day"
-                                                class="btn w-100 position-relative btn-default text-left calc_place">
-                                            1
-                                        </button>
-                                        <img src="~/images/chevron-small.png" alt=""
-                                             class="position-absolute calc-chevron">
-                                        <ul class="dropdown_menu_calc position-absolute list-unstyled list_day">
-                                            <li><a href="" class="d-block w-100" data-value="1">1</a></li>
-                                            <li><a href="" class="d-block w-100" data-value="2">2</a></li>
-                                            <li><a href="" class="d-block w-100" data-value="3">3</a></li>
-                                            <li><a href="" class="d-block w-100" data-value="4">4</a></li>
-                                            <li><a href="" class="d-block w-100" data-value="5">5</a></li>
-                                        </ul>
+                                    <div class=" invoice-day input-group col-6 pl-0">
+                                        <input asp-for="Birthdate" class="form-control" autocomplete="off" type="text" onfocus="(this.type='date')" />
                                     </div>
-                                    <div class=" invoice-month input-group col-3">
-                                        <select asp-for="Birthmonth" class="form-control selectpicker d-none" title="Ay">
-                                            <option class="bs-title-option" value=""></option>
-                                            <option value="1">Yanvar</option>
-                                            <option value="2">Fevral</option>
-                                            <option value="3">Mart</option>
-                                            <option value="4">Aprel</option>
-                                            <option value="5">May</option>
-                                            <option value="6">İyun</option>
-                                            <option value="7">İyul</option>
-                                            <option value="8">Avqust</option>
-                                            <option value="9">Sentyabr</option>
-                                            <option value="10">Oktyabr</option>
-                                            <option value="11">Noyabr</option>
-                                            <option value="12">Dekabr</option>
-                                        </select>
-                                        <button id="month"
-                                                class="btn w-100 position-relative btn-default text-left calc_place">
-                                            yanvar
-                                        </button>
-                                        <img src="~/images/chevron-small.png" alt=""
-                                             class="position-absolute calc-chevron">
-                                        <ul class="dropdown_menu_calc position-absolute list-unstyled list_month">
-                                            <li><a href="" class="d-block w-100" data-value="1">yanvar</a></li>
-                                            <li><a href="" class="d-block w-100" data-value="2">fevral</a></li>
-                                            <li><a href="" class="d-block w-100" data-value="3">mart</a></li>
-                                            <li><a href="" class="d-block w-100" data-value="4">aprel</a></li>
-                                            <li><a href="" class="d-block w-100" data-value="5">may</a></li>
-                                            <li><a href="" class="d-block w-100" data-value="6">iyun</a></li>
-                                            <li><a href="" class="d-block w-100" data-value="7">iyul</a></li>
-                                            <li><a href="" class="d-block w-100" data-value="8">avqust</a></li>
-                                            <li><a href="" class="d-block w-100" data-value="9">sentyabr</a></li>
-                                            <li><a href="" class="d-block w-100" data-value="10">oktyabr</a></li>
-                                            <li><a href="" class="d-block w-100" data-value="11">noyabr</a></li>
-                                            <li><a href="" class="d-block w-100" data-value="12">dekabr</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class=" invoice-year input-group col-3">
-                                        <select asp-for="Birthyear" class="form-control selectpicker d-none" title="İl">
-                                            <option class="bs-title-option" value=""></option>
-                                            <option value="2004">2004</option>
-                                            <option value="2003">2003</option>
-                                            <option value="2002">2002</option>
-                                            <option value="2001">2001</option>
-                                        </select>
-                                        <button id="year"
-                                                class="btn w-100 position-relative btn-default text-left calc_place">
-                                            2004
-                                        </button>
-                                        <img src="~/images/chevron-small.png" alt=""
-                                             class="position-absolute calc-chevron">
-                                        <ul class="dropdown_menu_calc position-absolute list-unstyled list_year">
-                                            <li><a href="" class="d-block w-100" data-value="2004">2004</a></li>
-                                            <li><a href="" class="d-block w-100" data-value="2003">2003</a></li>
-                                            <li><a href="" class="d-block w-100" data-value="2002">2002</a></li>
-                                            <li><a href="" class="d-block w-100" data-value="2001">2001</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class=" gender input-group col-3 pr-0">
+                                    <div class=" gender input-group col-6 pr-0">
                                         <select asp-for="Gender" name="gender" class="form-control selectpicker d-none" title="Cinsi *">
                                             <option class="bs-title-option" value=""></option>
-                                            <option value="2">Qadın</option>
-                                            <option value="1">Kişi</option>
+                                            <option value="qadin">Qadın</option>
+                                            <option value="kisi">Kişi</option>
                                         </select>
                                         <button id="gender"
                                                 class="btn w-100 position-relative btn-default text-left calc_place">
@@ -195,8 +201,8 @@
                                         <img src="~/images/chevron-small.png" alt=""
                                              class="position-absolute calc-chevron">
                                         <ul class="dropdown_menu_calc position-absolute list-unstyled list_gender">
-                                            <li><a href="" class="d-block w-100" data-value="2">qadın</a></li>
-                                            <li><a href="" class="d-block w-100" data-value="1">kişi</a></li>
+                                            <li><a href="" class="d-block w-100" data-value="qadin">qadın</a></li>
+                                            <li><a href="" class="d-block w-100" data-value="kisi">kişi</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -205,8 +211,8 @@
                                 <div class="col-xs-6 col-6 pl-0">
                                     <div class=" input-group">
                                         <input asp-for="FINkode" value="" type="text" name="finkode" class="form-control inputText"
-                                               placeholder=" ">
-                                        <span class="input_span">FİN * </span>
+                                               placeholder=" FİN * ">
+                                        @*<span class="input_span">FİN * </span>*@
                                         <span class="input_span fin">
                                             FİN kod nədir <i class="fa fa-question-circle" aria-hidden="true"></i>
                                         </span>
@@ -215,8 +221,8 @@
                                 <div class="col-xs-6 col-6 pr-0">
                                     <div class=" input-group">
                                         <input asp-for="Address" value="" type="text" name="address" class="form-control inputText"
-                                               placeholder=" ">
-                                        <span class="input_span">Ş/V-dəki ünvan *</span>
+                                               placeholder=" Ş/V-dəki ünvan *">
+                                        @*<span class="input_span">Ş/V-dəki ünvan *</span>*@
                                     </div>
                                 </div>
                             </div>
@@ -245,13 +251,13 @@
                             <img src="~/images/fin-big.png" alt="fin_image"
                                  class="img-responsive center-block w-100">
                             <div class="focus">
-                                <button type="button" class="btn">Şəkili böyüt</button>
+                                <button type="button" class="btn ID_btn">Şəkili böyüt</button>
                             </div>
                             <div class="modal_fin">
                                 <div class="modal-content-fin">
                                     <div class="modal-header d-flex justify-content-between align-items-center">
                                         <h4 class="modal-title mb-0" id="">Seriya nömrəsi</h4>
-                                        <button type="button" class="close_btn"><i class="fas fa-times"></i></button>
+                                        <button type="button" class="close_btn" style="height: 12px"><i class="fas fa-times"></i></button>
                                     </div>
                                     <img src="~/images/fin-big.png" alt="" class="w-100">
                                 </div>
@@ -268,3 +274,5 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+

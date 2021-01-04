@@ -1,0 +1,201 @@
+﻿@model Limak.az.ViewModels.OrderViewModel
+
+@{
+    ViewData["Title"] = "CreateOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="user-panel">
+    <section class="order">
+        <div class="container p-0">
+            <div class="row p-0">
+                <div class="order-head col-xs-12 col-12 w-100 d-flex justify-content-between align-items-center">
+                    <div class="col-md-4 col-sm-5 col-xs-6 pl-0 pr-0">
+                        <h4>SİFARİŞ <b>ET</b></h4>
+                    </div>
+                    <div class="col-md-8 col-sm-7 col-xs-6 pl-0 pr-0">
+                        <ul class="breadcrumb list-unstyled d-flex justify-content-end">
+                            <li class="pr-2"><a href="/">Ana səhifə / </a></li>
+                            <li class="pr-2"><a href=""> İstifadəçi paneli / </a></li>
+                            <li class="active">Sifariş et</li>
+                        </ul>
+                    </div>
+                </div>
+                <form asp-action="CreateOrder" method="POST">
+                    <div class="order-body col-xs-12 mb-4" style="height: 775px;">
+                        <div class="row" style="position: relative; height: 100%;">
+                            <div class="order-info col-md-9 col-sm-8 col-xs-12 p-0">
+                                <div class="order-left-side block p-0">
+                                    <ul class="nav nav-tabs w-100 justify-content-start">
+                                        <li class="d-flex justify-content-center align-items-center position-relative active">
+                                            <img src="~/images/order-turkey .png" alt="">
+                                            <a href="" class="img1 w-100">Türkiyə</a>
+                                        </li>
+                                        <!-- <li
+                                            class="d-flex justify-content-center align-items-center position-relative">
+                                            <img src="asserts/images/order-US.png" alt="">
+                                            <a href="#tab2" class="img2 w-100">Amerika</a>
+                                        </li> -->
+                                    </ul>
+                                    <div class="left-content order-content tab-content d-block col-12 col-sm-12 col-xs-12">
+                                        <div class="row">
+                                            <div class="col-md-9 col-sm-9 col-xs-6">
+                                                <div class="input-group border-radius">
+                                                    <input asp-for="OrderLink" type="text"
+                                                           class="form-control inputText" placeholder="Məhsul linki *">
+                                                    @*<span class="input_span">Məhsul linki *</span>*@
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-3 col-xs-6">
+                                                <div class="input-group border-radius">
+                                                    <input type="number" asp-for="ProductPrice" class="form-control prPrice prInput" placeholder="Məbləğ(TL) *">
+                                                    @*<span class="input_span">Məbləğ(TL) *</span>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <div class="pt-5">
+                                                    <div class="form-group form-check">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input inlandornot" asp-for="InlandOrNot" /> @Html.DisplayName("Türkiyə içi kargo *")
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-3 col-md-3 col-sm-3 col-xs-6 cargo_price">
+                                                <div class="input-group">
+                                                    <label class="select-class">Karqo məbləği *</label>
+                                                    <input type="number" asp-for="CargoPrice" class="form-control inputText cargoPrice prInput" value="0">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3  col-xs-6">
+                                                <div class="input-group">
+                                                    <label class="select-class">Cəmi(+5%)</label>
+                                                    <input type="text" asp-for="PriceResult" disabled="disabled" placeholder="Cəmi"
+                                                           class="form-control inputText priceResult prInput" value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                                <div class="input-group number-spinner">
+                                                    <input type="number" asp-for="Quantity"
+                                                           placeholder="Bağlamadakı məhsulun sayı *"
+                                                           class="form-control inputText text-center quantityInput prInput"
+                                                           min="1" value="1">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                                <div class="input-group border-radius">
+                                                    <input type="text" asp-for="Description" class="form-control inputText">
+                                                    <span class="input_span">
+                                                        Ölçü, rəng və s. üçün qeydlər
+                                                        *
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="btn-part text-right">
+                                                    <button class="btn-add btn-effect">
+                                                        <span>Yeni link əlavə et</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="order-price  mb-4 col-3 col-md-3 col-sm-4 col-xs-12">
+                                <div class="childDiv" style="position: static; top: -36px; width: 262px;">
+                                    <div class="right-top price-block block">
+                                        <div class="position-relative">
+                                            <button type="button" data-toggle="tooltip" data-placement="top"
+                                                    title="" data-original-title="Bu, Sizin Limak vasitəsilə son 30 gündə ölkəyə gətirdiyiniz bağlamaların məhsul dəyəri
+                                            və çatdırılma haqqı üçün ödədiyiniz məbləğdir. Qeyd edək ki, qanunvericiliyə görə 30
+                                            gün ərzində şəxsi istifadə üçün gətirilmiş poçt yüklərinin dəyəri və bunun üçün ödənmiş
+                                            çatdırılma haqqı toplam 300 dolları keçdikdə gömrük rüsumu tətbiq edilir."
+                                                    class="help_btn pull-right position-absolute p-0">
+                                                <img src="~/images/help-button.png" alt="question-mark"
+                                                     class="img-responsive">
+                                            </button>
+                                            <div class="row w-100">
+                                                <div class="col-6 p-0">
+                                                    <h4>Son 30 gün</h4>
+                                                    <p><sup>$</sup></p>
+                                                </div>
+                                                <div class="col-6 p-0 position-relative">
+                                                    <span id="procent"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="right-bottom">
+                                        <h4 class="text-center">Sifariş et</h4>
+                                        <label class="radio-button">
+                                            <span class="exp">Kart ilə ödəniş </span>
+                                            <br>
+                                            <span class="description">
+                                                ( İstənilən kredit və ya debet kartı ilə
+                                                ödəniş edə bilərsiniz )
+                                            </span>
+                                            <input type="radio" checked="checked">
+                                            <span class="checkmark-radio"></span>
+                                        </label>
+                                        <label class="radio-button">
+                                            <span class="exp">TL balansı ilə ödəniş </span>
+                                            <br>
+                                            <span class="description">
+                                                ( TL balansınızda kifayət qədər vəsait
+                                                varsa, ödəniş edə bilərsiniz <br><b>
+                                                    TL balansınız:
+                                                    0.00TL
+                                                </b>
+                                            </span>
+                                            <input type="radio" checked="checked">
+                                            <span class="checkmark-radio"></span>
+                                        </label>
+                                        <div class="sum">
+                                            <span>Cəmi: </span>
+                                            <span class="cash">0 TL</span>
+                                            <label class="check-button">
+                                                <span class="check-btn-text">
+                                                    Məsafəli satış şərtlərini qəbul
+                                                    edirəm
+                                                </span>
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                        <div class="input-group">
+                                            <label class="select-class">Çatdırılma ofisi *</label>
+                                            <div class="drop-down v-select">
+                                                <div class="drop-down-toggle">
+                                                    <select class="form-control" id="warehouseDropdown" asp-for="WarehouseId" asp-items="@ViewBag.Warehouse">
+                                                        <option>  </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-center">
+                                            @*<button class="btn-effect btn-send">
+                                                Ödəniş et
+                                            </button>*@
+
+                                            <input type="submit" class="btn-effect btn-send" value="Sifariş et" />
+                                            <p class="almark">Bu bir Almark xidmətidir.</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+

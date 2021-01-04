@@ -1,0 +1,232 @@
+﻿@model Limak.az.ViewModels.DeclarationViewModel
+
+@{
+    ViewData["Title"] = "CreateDeclaration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--<h1>CreateDeclaration</h1>
+
+<h4>DeclarationViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateDeclaration">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>-->
+            @*<div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>*@
+            <!--<div class="form-group">
+                <label asp-for="Shop" class="control-label"></label>
+                <input asp-for="Shop" class="form-control" />
+                <span asp-validation-for="Shop" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductType" class="control-label"></label>
+                <input asp-for="ProductType" class="form-control" />
+                <span asp-validation-for="ProductType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quantity" class="control-label"></label>
+                <input asp-for="Quantity" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductPrice" class="control-label"></label>
+                <input asp-for="ProductPrice" class="form-control" />
+                <span asp-validation-for="ProductPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TrackingCode" class="control-label"></label>
+                <input asp-for="TrackingCode" class="form-control" />
+                <span asp-validation-for="TrackingCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Link" class="control-label"></label>
+                <input asp-for="Link" class="form-control" />
+                <span asp-validation-for="Link" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeclarationDate" class="control-label"></label>
+                <input asp-for="DeclarationDate" class="form-control" />
+                <span asp-validation-for="DeclarationDate" class="text-danger"></span>
+            </div>
+            <div class="my-2 form-group">
+                <label asp-for="File" class="control-label">Sənəd:</label>
+                <input type="file" asp-for="File" class="form-control" />
+                <span asp-validation-for="File" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>-->
+            @*<div class="form-group">
+                <label asp-for="DeclarationStatusId" class="control-label"></label>
+                <input asp-for="DeclarationStatusId" class="form-control" />
+                <span asp-validation-for="DeclarationStatusId" class="text-danger"></span>
+            </div>*@
+            <!--<div class="form-group">
+                <label asp-for="WarehouseId" class="control-label"></label>
+                <input asp-for="WarehouseId" class="form-control" />
+                <span asp-validation-for="WarehouseId" class="text-danger"></span>
+            </div>-->
+            @*<div class="form-group">
+                <label asp-for="UserId" class="control-label"></label>
+                <input asp-for="UserId" class="form-control" />
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>*@
+            <!--<div class="form-group">
+                <label asp-for="CountryId" class="control-label"></label>
+                <input asp-for="CountryId" class="form-control" />
+                <span asp-validation-for="CountryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>-->
+
+
+<div class="user-panel">
+    <section class="order">
+        <div class="container p-0">
+            <div class="row p-0">
+                <div class="order-head col-xs-12 col-12 w-100 d-flex justify-content-between align-items-center">
+                    <div class="col-md-4 col-sm-5 col-xs-6 pl-0 pr-0">
+                        <h4>BƏYANNAMƏ <b>YÜKLƏ</b></h4>
+                    </div>
+                    <div class="col-md-8 col-sm-7 col-xs-6 pl-0 pr-0">
+                        <ul class="breadcrumb list-unstyled d-flex justify-content-end">
+                            <li class="pr-2"><a href="/">Ana səhifə / </a></li>
+                            <li class="pr-2"><a href=""> İstifadəçi paneli / </a></li>
+                            <li class="active">Bəyan et</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="order-body col-xs-12 h-100 mb-4">
+                    <div class="row position-relative h-100">
+                        <form asp-action="CreateDeclaration" method="POST" class="order-info col-9 col-md-9 col-sm-8 col-xs-12 p-0">
+                            <div class="order-info col-12 h-100">
+                                <div class="order-left-side block p-0">
+                                    <ul class="nav nav-tabs w-100 justify-content-start">
+                                        <li class="d-flex justify-content-center align-items-center position-relative active">
+                                            <img src="asserts/images/order-turkey .png" alt="">
+                                            <a href="" class="img1 w-100">Türkiyə</a>
+                                        </li>
+                                        <li class="d-flex justify-content-center align-items-center position-relative">
+                                            <img src="asserts/images/order-US.png" alt="">
+                                            <a href="#tab2" class="img2 w-100">Amerika</a>
+                                        </li>
+                                    </ul>
+                                    <div class="left-content order-content tab-content d-block col-12 col-sm-12 col-xs-12">
+                                        <div class="row">
+                                            <div class="col-md-7 col-sm-7 col-xs-6 ">
+                                                <div class="input-group border-radius">
+                                                    <input asp-for="Shop" type="text" placeholder="Mağaza adı *"
+                                                           class="form-control inputText">
+                                                    @*<span class="input_span">Mağaza adı *</span>*@
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5 col-sm-5 col-xs-6">
+                                                <div class="input-group border-radius">
+                                                    <input type="text" asp-for="ProductType" class="form-control" placeholder="Bağlamadakı məhsulun növü *">
+                                                    @*<span class="input_span">Bağlamadakı məhsulun növü *</span>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="input-group number-spinner">
+                                                    <input type="number" asp-for="Quantity"
+                                                           placeholder="Məhsulun sayı *"
+                                                           class="form-control inputText text-center" min="1">
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="input-group">
+                                                    <input type="text" asp-for="ProductPrice" class="form-control inputText" placeholder="Qiymət TL *">
+                                                    @*<span class="input_span">Qiymət TL *</span>*@
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="input-group">
+                                                    <input type="text" asp-for="TrackingCode" class="form-control inputText" placeholder="Sifarişin izləmə kodu *">
+                                                    @*<span class="input_span">Sifarişin izləmə kodu *</span>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                                <div class="input-group">
+                                                    <label class="select-class">Çatdırılma ofisi *</label>
+                                                    <div class="drop-down v-select">
+                                                        <div class="drop-down-toggle">
+                                                            <select class="form-control" id="warehouseDropdown" asp-for="WarehouseId" asp-items="@ViewBag.Warehouse">
+                                                                <option>  </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                                <div class="input-group border-radius">
+                                                    <label class="select-class">
+                                                        Sifarişin verilmə tarixi
+                                                        *
+                                                    </label>
+                                                    <input asp-for="DeclarationDate" type="text" placeholder=""
+                    onfocus="(this.type='date')" class="form-control inputText">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="textarea-form form-group">
+                                                    <textarea asp-for="Description" rows="4" id="comment"
+                                                              placeholder="Bağlamanıza aid qeydləriniz varsa yazın"
+                                                              class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="btn-part text-left">
+                                                    <label for="file" class="invoice-upload">
+                                                        <span>İnvoys yüklə</span>
+                                                        <input type="file" asp-for="File" id="file" class="form-control-file">
+                                                    </label>
+                                                    <input type="submit" value="Göndər" class="btn-effect">@*<span>Göndər</span></input>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="order-price mb-4 col-3 col-md-3 col-sm-4 col-xs-12 bg-light">
+                            <div class="invoice-right d-block">
+                                <h3 class="text-center">Diqqət!</h3>
+                                <p>
+                                    Dəyərli müştərilər, sifarişlərinizi özünüz etdiyiniz
+                                    zaman bəyannamə Sizin tərəfinizdən əlavə olunmalıdır.
+                                    İnvoys yükləmədən bəyannamə əlavə etmək mümkün deyildir.
+                                    Bəyannaməni dəqiq və operativ doldurmağınız Sizin bağlamalarınızın
+                                    gömrük yoxlamasından daha tez və
+                                    problemsiz keçməsinə kömək edəcək.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

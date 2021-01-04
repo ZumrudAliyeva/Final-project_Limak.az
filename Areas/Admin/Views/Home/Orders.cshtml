@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Limak.az.Models.Order>
+
+@{
+    ViewData["Title"] = "Orders";
+    Layout = "~/Views/Shared/_Layout_areas.cshtml";
+}
+
+
+<div class="table-responsive resizable-table">
+    <table class="table table-bordered w-100">
+        <thead class="w-100">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderLink)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.User.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductPrice)
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+
+                        @if (item.CountryId == 1)
+                        {
+                            <img src="~/images/usa.7b416161.png" />
+                        }
+                        else
+                        {
+                            <img src="~/images/turkey.png" />
+                        }
+                        @Html.DisplayFor(modelItem => item.OrderLink)
+                    </td>
+                    <td >
+                        @Html.DisplayFor(modelItem => item.User.Name)  @Html.DisplayFor(modelItem => item.User.Surname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductPrice)
+                    </td>
+
+                    <td>
+                        @if (item.OrderStatusId == 1)
+                        {
+                            <a asp-action="CreateDeclaration" asp-route-id="@item.Id" class="btn btn-warning" style="color:white;" >Bəyan et<i class="ml-1 fas fa-check"></i></a>
+                        }
+
+                    </td>
+                    <td>
+                        <div class="d-flex flex-nowrap">
+                            <a  class="btn btn-secondary mr-1 " asp-action="OrderDetails" asp-route-id="@item.Id" asp-controller="Home"><i data-id="@item.Id" class="fas fa-info-circle orderdetailsId"></i></a>
+                            <a asp-action="DeleteOrder" asp-route-id="@item.Id" class="btn btn-danger" data-title="Delete" onclick="return confirm('Are you sure you want to delete? This action cannot be undone.');"><i class="fas fa-trash"></i></a>
+                        </div>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="modalDiv">
+
+</div>
+

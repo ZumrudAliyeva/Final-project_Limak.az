@@ -1,0 +1,232 @@
+﻿<main class="w-100">
+    <div class="container-main w-100">
+        <!-- =============== breadcrumbs ================= -->
+        <section class="w-100">
+            <div class="breadcrumb container d-flex justify-content-between align-items-center">
+                <div class="col-4 col-md-4 col-sm-5 col-xs-6">
+                    <h4>Kalkulyator </h4>
+                </div>
+                <div class="col-8 col-md-8 col-sm-7 col-xs-6 text-right">
+                    <ul class="breadcrumb-list d-flex justify-content-end align-items-center list-unstyled">
+                        <li><a href="">Ana səhifə </a></li>
+                        <li class=""> Kalkulyator</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!-- ==== calculator and all ================= -->
+        <section class="slide-calc calc_main_container">
+            <div class="container">
+                <div class="row">
+                    <div class="calculator-main calculator-main_country col-5 col-md-5 col-sm-12 col-xs-12">
+                        <div class="block">
+                            <h4 class="w-100">
+                                Kalkulyator<span id="reset_calculator">Kalkulyatoru sıfırla</span>
+                            </h4>
+                            <div class="row">
+                                <div class="col-6 col-xs-6 pl-0">
+                                    <div class="input-group mb-4">
+                                        <select class="form-control selectpicker d-none" name="country" title="Ölkə">
+                                            <option selected="" value="turkiye">Türkiyə</option>
+                                            <option value="amerika">Amerika</option>
+                                        </select>
+                                        <button id="country"
+                                                class="btn w-100 position-relative btn-default text-left calc_place">
+                                            Türkiyə
+                                        </button>
+                                        <img src="~/images/chevron-small.png" alt=""
+                                             class="position-absolute calc-chevron">
+                                        <ul class="dropdown_menu_calc position-absolute list-unstyled country">
+                                            <li><a href="" class="d-block w-100" data-value="turkiye">Türkiyə</a></li>
+                                            <li><a href="" class="d-block w-100" data-value="amerika">Amerika</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="input-group mb-4">
+                                        <input type="text" name="" id="weight"
+                                               class="form-control inputText position-relative" placeholder="Çəki">
+                                        @*<span class="position-absolute input_span">Çəki</span>*@
+                                        <div class="input-group-btn position-absolute h-100" style="top: 0; right: 0;">
+                                            <select class="form-control selectpicker d-none" name="weight" title="Çəki">
+                                                <option selected="" value="kg">kq</option>
+                                                <option value="gr">qr</option>
+                                            </select>
+                                            <button id="weight-btn"
+                                                    class="btn calc-btn w-100 position-relative btn-default text-left h-100">
+                                                kq
+                                            </button>
+                                            <img src="~/images/chevron-small.png" alt=""
+                                                 class="position-absolute calc-chevron">
+                                            <ul class="dropdown_menu_calc weight-ul position-absolute list-unstyled w-100 weight" style="top: 38px; right: 0;">
+                                                <li><a href="" class="d-block w-100" data-value="kg">kq</a></li>
+                                                <li><a href="" class="d-block w-100" data-value="gr">qr</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="input-group mb-4">
+                                        <input type="text" name="" id=""
+                                               class="form-control inputText position-relative">
+                                        <span class="position-absolute input_span">En</span>
+                                        <div class="input-group-btn position-absolute h-100" style="top: 0; right: 0">
+                                            <select class="form-control selectpicker d-none" title="En">
+                                                <option selected="" value="sm">sm</option>
+                                                <option value="dm">dm</option>
+                                                <option value="m">m</option>
+                                            </select>
+                                            <button id=""
+                                                    class="btn calc-btn w-100 position-relative btn-default text-left h-100">
+                                                sm
+                                            </button>
+                                            <img src="~/images/chevron-small.png" alt=""
+                                                 class="position-absolute calc-chevron">
+                                            <ul class="dropdown_menu_calc width_ul position-absolute list-unstyled  w-100" style="top: 38px; right: 0;">
+                                                <li><a href="" class="d-block w-100">sm</a></li>
+                                                <li><a href="" class="d-block w-100">dm</a></li>
+                                                <li><a href="" class="d-block w-100">m</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="input-group mb-4">
+                                        <input type="text" name="" id=""
+                                               class="form-control inputText position-relative">
+                                        <span class="position-absolute input_span">Hündürlük</span>
+                                        <div class="input-group-btn position-absolute h-100" style="top: 0; right: 0;">
+                                            <button id=""
+                                                    class="btn calc-btn w-100 position-relative btn-default text-left h-100">
+                                                sm
+                                            </button>
+                                            <img src="~/images/chevron-small.png" alt=""
+                                                 class="position-absolute calc-chevron">
+                                            <ul class="dropdown_menu_calc width_ul position-absolute list-unstyled">
+                                                <li><a href="" class="d-block w-100">sm</a></li>
+                                                <li><a href="" class="d-block w-100">dm</a></li>
+                                                <li><a href="" class="d-block w-100">m</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-xs-6 pr-0">
+                                    <div class="input-group mb-4">
+                                        <button id="city"
+                                                class="btn w-100 position-relative btn-default text-left calc_place h-100">
+                                            Bakı
+                                        </button>
+                                        <img src="~/images/chevron-small.png" alt=""
+                                             class="position-absolute calc-chevron">
+                                        <ul class="dropdown_menu_calc position-absolute list-unstyled">
+                                            <li><a href="" class="d-block w-100">Gəncə</a></li>
+                                            <li><a href="" class="d-block w-100">Sumqayıt</a></li>
+                                            <li><a href="" class="d-block w-100">Zaqatala</a></li>
+                                            <li><a href="" class="d-block w-100">Lənkəran</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="input-group mb-4">
+                                        <input type="number" min="1" name="" id="count_pack"
+                                               class="form-control inputText position-relative" placeholder="Bağlama sayı">
+                                        @*<span class="position-absolute input_span">Bağlama sayı</span>*@
+                                    </div>
+                                    <div class="input-group mb-4">
+                                        <input type="text" name="" id=""
+                                               class="form-control inputText position-relative">
+                                        <span class="position-absolute input_span">Uzunluq</span>
+                                        <div class="input-group-btn position-absolute h-100" style="top: 0; right: 0">
+                                            <button id=""
+                                                    class="btn calc-btn w-100 position-relative btn-default text-left h-100">
+                                                sm
+                                            </button>
+                                            <img src="~/images/chevron-small.png" alt=""
+                                                 class="position-absolute calc-chevron">
+                                            <ul class="dropdown_menu_calc length_ul position-absolute list-unstyled" style="top: 38px; right: 0;">
+                                                <li><a href="" class="d-block w-100">sm</a></li>
+                                                <li><a href="" class="d-block w-100">dm</a></li>
+                                                <li><a href="" class="d-block w-100">m</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="input-group mb-4">
+                                        <button id="calculate" class="btn-effect border-btn w-100">Hesabla</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-xs-12 p-0">
+                                <p class="count">Cəmi: <b class="all_count" id="priceResult">0,00</b></p>
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div id="currency" class="block price">
+                                <h4>Məzənnə kalkulyatoru</h4>
+                                <form action="" class="currency_form">
+                                    <div class="input-group currency_input">
+                                        <input id="from" type="number" class="form-control" placeholder="0.0">
+                                        <div class="input-group-btn">
+                                            <button id="from-btn"
+                                                    class="btn calc-btn w-100 position-relative btn-default text-left">
+                                                AZN
+                                            </button>
+                                            <img src="asserts/images/chevron-small.png" alt=""
+                                                 class="position-absolute calc-chevron">
+                                            <ul class="dropdown_menu_calc currency-from-ul position-absolute list-unstyled">
+                                                <li><a href="" class="d-block w-100">AZN</a></li>
+                                                <li><a href="" class="d-block w-100">USD</a></li>
+                                                <li><a href="" class="d-block w-100">TRY</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="input-group currency_input">
+                                        <input id="to" type="number" class="form-control" placeholder="0.0">
+                                        <div class="input-group-btn">
+                                            <button id="from-btn"
+                                                    class="btn calc-btn w-100 position-relative btn-default text-left">
+                                                AZN
+                                            </button>
+                                            <img src="asserts/images/chevron-small.png" alt=""
+                                                 class="position-absolute calc-chevron">
+                                            <ul class="dropdown_menu_calc currency-to-ul position-absolute list-unstyled">
+                                                <li><a href="" class="d-block w-100">AZN</a></li>
+                                                <li><a href="" class="d-block w-100">USD</a></li>
+                                                <li><a href="" class="d-block w-100">TRY</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </form>
+                                <span>Günün məzənnəsinə uyğun hesablanır.</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-7 col-md-7 col-sm-12 col-xs-12">
+                        <div class="col-12 pl-4 pr-4 calc-text">
+                            <h3>Necə hesablayım ?</h3>
+                            <p>
+                                Seçdiyiniz məhsulların toplam məbləğini "Konvertor" yazılan hissəyə qeyd edin.
+                                Kalkulatorda ödəyəcəyiniz toplam məbləğ manat ilə göstəriləcək
+                            </p>
+                            <h5>Qeyd:</h5>
+                            <p>
+                                Hesablayacağınız məbləğlərdə satıcı firmaların tələb etdiyi Türkiyə daxili karqo
+                                pulunu nəzərə almağı unutmayın
+                            </p>
+                            <h4>Məlumat</h4>
+                            <p>
+                                Şirkətimiz Türkiyə və Amerikadan yüklərin daşınması ilə məşğul olur. Sizin
+                                sifarişləriniz həftədə 2 dəfə Türkiyədən, 1 dəfə isə Amerikadan Bakıya
+                                çatdırılır.
+                            </p>
+                            <p>
+                                Limak Sizə bağlamalarınızın çəkisindən asılı olaraq, Türkiyədən 2 dollardan,
+                                ABŞ-dan
+                                isə 3 dollardan başlayan qiymətlərlə sərfəli çatdırılma təklif edir.
+                            </p>
+                            <p>
+                                Sifariş olunan bağlamanın çatdırılma haqqı çəkiyə görə hesablanır. Ölçüsü 1
+                                metrdən
+                                böyük olan bağlamaların kargo pulu isə həcmi çəkiyə görə müəyyən edilir.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+</main>

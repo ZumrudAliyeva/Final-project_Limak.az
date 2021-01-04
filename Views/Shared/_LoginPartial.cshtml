@@ -1,0 +1,53 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<CustomAppUser> signInManager
+@inject UserManager<CustomAppUser> userManager
+@model Limak.az.ViewModels.LoginViewModel
+
+@{ ViewData["Title"] = "UserPanel";}
+
+@{ var user = await userManager.GetUserAsync(User);}
+
+
+<div class="login-menu-content">
+    <form asp-action="Login" asp-controller="Account" method="POST" class="h-100" id="loginForm">
+        <button type="button" class="close">
+            <span aria-hidden="true">
+                <img src="~/images/close1.png" alt="close" class="">
+            </span>
+        </button>
+        <div class="row h-100">
+            <div class="login-left col-6 col-sm-6 col-xs-12 h-100">
+                <h3 class="text-center">Hesaba daxil ol</h3>
+                <div class="input-group border-radius">
+                    <input asp-for="Email" required="" type="text" class="form-control inputText"
+                           placeholder=" E-mail *">
+                    @*<span class="input_span">E-mail *</span>*@
+                </div>
+                <div class="input-group border-radius">
+                    <input asp-for="Password" required="" type="password" class="form-control inputText"
+                           placeholder=" Şifrə * ">
+                    @*<span class="input_span">Şifrə* </span>*@
+                </div>
+                <div class="save-password">
+                    <input type="hidden" asp-for="RememberMe" value="true" />
+                    <label class="check-button position-relative">
+                        <span class="pl-4">Yadda saxla</span>
+                        <span class="checkmark"></span>
+                    </label>
+                    <a href="">Şifrəni unutdum</a>
+                </div>
+                <div class="">
+                    <button type="submit" href="" class="btn-enter btn-password">Daxil ol</button>
+                    <a asp-action="Register" asp-controller="Account" class="btn-log btn-register-link" style="right: 43px !important;">Qeydiyyat</a>
+                </div>
+            </div>
+            <div class="login-right col-sm-6 position-relative p-0">
+                <img src="~/images/pop-back.png" alt="popup"
+                     class="pop-bg w-100 h-100 img-responsive">
+                <img src="~/images/popup.png" class="pop-img" alt="pop_back">
+            </div>
+        </div>
+    </form>
+</div>
+
+

@@ -1,19 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Final_project_Limak.az.Contexts;
-using Final_project_Limak.az.Models;
+using AutoMapper;
+using Limak.az.Contexts;
+using Limak.az.Data;
+using Limak.az.Interfaces;
+using Limak.az.Models;
+using Limak.az.Repos;
+using Limak.az.ViewModels;
+using Limak.ViewModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Final_project_Limak.az
+namespace Limak.az
 {
     public class Startup
     {
@@ -27,17 +28,41 @@ namespace Final_project_Limak.az
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<CustomAppDbContext>(
-                option => option.UseSqlServer("Server=DESKTOP-QL20RPD\\SQLEXPRESS;Database=FinalProjectDb;Trusted_Connection=True;"));
+
+
+            services.AddDbContext<LimakDbContext>(
+                option => option.UseSqlServer("Server=DESKTOP-QL20RPD\\SQLEXPRESS;Database=LimakProjectDb;Trusted_Connection=True;"));
+
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IDeclarationRepository, DeclarationRepository>();
+            services.AddScoped<IUserBalanceRepository, UserBalanceRepository>();
 
             services.AddIdentity<CustomAppUser, IdentityRole>(options =>
                 {
                     options.SignIn.RequireConfirmedEmail = true;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
                 })
-            .AddEntityFrameworkStores<CustomAppDbContext>()
+            .AddEntityFrameworkStores<LimakDbContext>()
             .AddDefaultTokenProviders();
 
+
             services.AddControllersWithViews();
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new RegisterViewModelProfile());
+                mc.AddProfile(new OrderViewModelProfile());
+                mc.AddProfile(new DeclarationViewModelProfile());
+                mc.AddProfile(new SettingsViewModelProfile());
+            });
+            #region Email configuration
+
+            #endregion
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
+            //services.AddMvc(option => option.EnableEndpointRouting = false);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,18 +79,35 @@ namespace Final_project_Limak.az
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
+
+            app.SeedRole();
+
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute(
+            //      name: "areas",
+            //      template: "{area:exists}/{controller=Account}/{action=GetAllUsers}/{id?}");
+            //});
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "areas",
+                    pattern: "{area:exists}/{controller=Account}/{action=Login}/{id?}");
+
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
         }
     }
 }

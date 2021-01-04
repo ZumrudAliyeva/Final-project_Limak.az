@@ -1,5 +1,17 @@
-﻿@model Final_project_Limak.az.Models.RegisterViewModel
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<CustomAppUser> signInManager
+@inject UserManager<CustomAppUser> userManager
 
+
+@{ var user = await userManager.GetUserAsync(User);
+    var displayName = "";
+    var customerId = ""; }
+
+@if (signInManager.IsSignedIn(User))
+{
+    customerId = user.CustomerId;
+    displayName = user.Name + " " + user.Surname;
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -98,114 +110,95 @@
                 </nav>
             </header>
             <!-- ============= Login and register box =========================================== -->
-            <div class="login-menu-bg">
-                <div class="login-menu-content">
-                    <form asp-action="Login" method="POST" class="h-100">
-                        <button type="button" class="close">
-                            <span aria-hidden="true">
-                                <img src="~/images/close1.png" alt="close" class="">
-                            </span>
-                        </button>
-                        <div class="row h-100">
-                            <div class="login-left col-6 col-sm-6 col-xs-12 h-100">
-                                <h3 class="text-center">Hesaba daxil ol</h3>
-                                <div class="input-group border-radius">
-                                    <input asp-for="Email" name="email" required="" type="text" class="form-control inputText"
-                                           placeholder=" ">
-                                    <span class="input_span">E-mail *</span>
-                                </div>
-                                <div class="input-group border-radius">
-                                    <input asp-for="Password" name="password" required="" type="password" class="form-control inputText"
-                                           placeholder=" ">
-                                    <span class="input_span">Şifrə* </span>
-                                </div>
-                                <div class="save-password">
-                                    <label class="check-button position-relative">
-                                        <span class="pl-4">Yadda saxla</span>
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <a href="">Şifrəni unutdum</a>
-                                </div>
-                                <div class="">
-                                    <button type="submit" href="" class="btn-enter btn-password">Daxil ol</button>
-                                    <a asp-action="Register" class="btn-log">Qeydiyyat</a>
-                                </div>
-                            </div>
-                            <div class="login-right col-sm-6 position-relative p-0">
-                                <img src="~/images/pop-back.png" alt="popup"
-                                     class="pop-bg w-100 h-100 img-responsive">
-                                <img src="~/images/popup.png" class="pop-img" alt="pop_back">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <!-- =============== Static header and nav =========================================== -->
-            <header id="static-header" class="static d-lg-block d-md-none d-sm-none w-100">
-                <nav class="container nav-top d-flex justify-content-between align-items-center w-100">
-                    <ul class="nav d-flex justify-content-start align-items-center static-nav navbar navbar-expand-lg list-unstyled p-0 mb-0 navbar_left">
-                        <li class="nav_item"><a href="" class="nav_link">Qaydalar</a></li>
-                        <li class="nav_item"><a href="" class="nav_link">Suallar</a></li>
-                        <li class="nav_item"><a href="" class="nav_link">Haqqımızda</a></li>
-                    </ul>
-                    <ul class="nav d-flex justify-content-start align-items-center static-nav navbar navbar-expand-lg list-unstyled p-0 mb-0  navbar_right">
-                        <li class="nav-item position-relative"><a href="" class="nav_link login_link">Daxil ol</a></li>
-                        <li class="nav-item"><a href="" class="nav_link">Qeydiyyat</a></li>
-                    </ul>
-                </nav>
-                <nav class="navbar nav-bottom w-100 p-0">
-                    <div class="container h-100">
-                        <ul class="main_logo d-flex justify-content-between align-items-center static-nav navbar navbar-expand-lg list-unstyled p-0 mb-0 h-100">
-                            <li class="logo nav_item">
-                                <a href="" class="nav_link w-100 d-block">
-                                    <img src="~/images/Limak-Logo.png" alt="">
-                                </a>
-                            </li>
-                            <li class="dropdown nav_item position-relative d-flex justify-content-between align-items-center">
-                                <a href="" class="nav_link">AZ</a>
-                                <img src="~/images/chevron.png" alt="">
-                                <ul class="dropdown_menu position-absolute list-unstyled">
-                                    <li class="mb-2"><a href="">AZ</a></li>
-                                    <li><a href="">RU</a></li>
+            <div class="login-menu-bg"></div>
+                <!-- =============== Static header and nav =========================================== -->
+                <header id="static-header" class="static d-lg-block d-md-none d-sm-none w-100">
+                    <nav class="container nav-top d-flex justify-content-between align-items-center w-100">
+                        <ul class="nav d-flex justify-content-start align-items-center static-nav navbar navbar-expand-lg list-unstyled p-0 mb-0 navbar_left">
+                            <li class="nav_item"><a asp-action="Rules" class="nav_link">Qaydalar</a></li>
+                            <li class="nav_item"><a asp-action="Questions" class="nav_link">Suallar</a></li>
+                            <li class="nav_item"><a asp-action="AboutUs" class="nav_link">Haqqımızda</a></li>
+                        </ul>
+                        <ul class="nav d-flex justify-content-start align-items-center static-nav navbar navbar-expand-lg list-unstyled p-0 mb-0  navbar_right">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                <li class="nav-item position-relative user-name pointer-event user-li" style="cursor: pointer;">@displayName</li>
+                                <ul class="d-none position-absolute text-center list-unstyled p-3 mb-0 h-auto user_menu" style="background-color: #fff;
+top: 28px;right: -13px; z-index: 10000;">
+                                    <li class="d-flex justify-content-center align-items-center"><a asp-action="UserPanel" asp-controller="Home" class="d-block w-100" data-value="">Panel səhifəsi</a></li>
+                                    <li class="d-flex justify-content-center align-items-center"><a href="" class="d-block w-100 h-100 pb-0 pt-0" data-value="">Sifarişlərim</a></li>
+                                    <li class="d-flex justify-content-center align-items-center"><a href="" class="d-block h-100 w-100 pb-0 pt-0" data-value="">Bağlamalarım</a></li>
+                                    <li class="d-flex justify-content-center align-items-center"><a href="" class="d-block h-100 w-100 pb-0 pt-0" data-value="">TL balansım</a></li>
+                                    <li class="d-flex justify-content-center align-items-center"><a href="" class="d-block h-100 w-100 pb-0 pt-0" data-value="">AZN balansım</a></li>
+                                    <li class="d-flex justify-content-center align-items-center"><a href="" class="d-block h-100 w-100 pb-0 pt-0" data-value="">Tənzimləmələr</a></li>
+                                    <li class="d-flex justify-content-center align-items-center"><a asp-action="Logout" asp-controller="Account" class="d-block h-100 w-100 pb-0 pt-0" data-value="">Hesabdan çıx</a></li>
                                 </ul>
-                            </li>
+ }
+                                            else
+                                            {
+                                <li class="nav-item position-relative"><a href="" class="nav_link login_link">Daxil ol</a></li>
+                                                <li class="nav-item"><a asp-action="Register" asp-controller="Account" class="nav_link">Qeydiyyat</a></li>}
                         </ul>
-                        <ul class="nav navbar_main d-flex justify-content-between align-items-center static-nav navbar navbar-expand-lg list-unstyled p-0 mb-0 h-100">
-                            <li class="nav_item d-flex justify-content-center align-items-center h-100">
-                                <a href=""
-                                   class="h-100">Ölkələr</a>
-                            </li>
-                            <li class="nav_item d-flex justify-content-center align-items-center h-100">
-                                <a href=""
-                                   class="h-100">Kalkulyator</a>
-                            </li>
-                            <li class="nav_item d-flex justify-content-center align-items-center h-100">
-                                <a href=""
-                                   class="h-100">Mağazalar</a>
-                            </li>
-                            <li class="nav_item d-flex justify-content-center align-items-center h-100">
-                                <a href=""
-                                   class="h-100">Əlaqə</a>
-                            </li>
-                        </ul>
-                        <ul class="d-flex justify-content-between align-items-center static-nav navbar navbar-expand-lg list-unstyled p-0 mb-0 h-100">
-                            <li class="nav_item tel">
-                                <a href=""
-                                   class="nav_link d-flex justify-content-start align-items-center position-relative">
-                                    <span class="tel-addr">*9595</span>
-                                    <span>
-                                        <p class="mb-0">DƏSTƏK</p>
-                                        <p class="mb-0">XƏTTİ</p>
-                                    </span>
-                                    <span class="d-block phone-img"><img src="~/images/phone.png" alt=""></span>
-                                </a>
-                            </li>
-                            <li class="nav_item"><a href="" class="btn-order">SİFARİŞ ET</a></li>
-                        </ul>
-                    </div>
-                </nav>
-            </header>
-        </div>
+                    </nav>
+                    <nav class="navbar nav-bottom w-100 p-0">
+                        <div class="container h-100 flex-nowrap p-0">
+                            <ul class="main_logo d-flex justify-content-between align-items-center static-nav navbar navbar-expand-lg list-unstyled p-0 mb-0 h-100">
+                                <li class="logo nav_item">
+                                    <a href="" class="nav_link w-100 d-block">
+                                        <img src="~/images/Limak-Logo.png" alt="">
+                                    </a>
+                                </li>
+                                <li class="dropdown nav_item position-relative d-flex justify-content-between align-items-center">
+                                    <a href="" class="nav_link">AZ</a>
+                                    <img src="~/images/chevron.png" alt="">
+                                    <ul class="dropdown_menu position-absolute list-unstyled">
+                                        <li class="mb-2"><a href="">AZ</a></li>
+                                        <li><a href="">RU</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="nav navbar_main d-flex justify-content-between align-items-center static-nav navbar navbar-expand-lg list-unstyled p-0 mb-0 h-100">
+                                <li class="nav_item d-flex justify-content-center align-items-center h-100">
+                                    <a asp-action="Countries" asp-controller="Home"
+                                       class="h-100">Ölkələr</a>
+                                </li>
+                                <li class="nav_item d-flex justify-content-center align-items-center h-100">
+                                    <a asp-action="Calculator" asp-controller="Home"
+                                       class="h-100">Kalkulyator</a>
+                                </li>
+                                <li class="nav_item d-flex justify-content-center align-items-center h-100">
+                                    <a asp-action="Shops" asp-controller="Home"
+                                       class="h-100">Mağazalar</a>
+                                </li>
+                                <li class="nav_item d-flex justify-content-center align-items-center h-100">
+                                    <a asp-action="Contact" asp-controller="Home"
+                                       class="h-100">Əlaqə</a>
+                                </li>
+                            </ul>
+                            <ul class="d-flex justify-content-between align-items-center static-nav navbar navbar-expand-lg list-unstyled p-0 mb-0 h-100">
+                                <li class="nav_item tel pr-1">
+                                    <a href=""
+                                       class="nav_link d-flex justify-content-start align-items-center position-relative">
+                                        <span class="tel-addr">*9595</span>
+                                        <span>
+                                            <p class="mb-0">DƏSTƏK</p>
+                                            <p class="mb-0">XƏTTİ</p>
+                                        </span>
+                                        <span class="d-block phone-img"><img src="~/images/phone.png" alt=""></span>
+                                    </a>
+                                </li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                            <li class="nav_item"><a asp-action="CreateDeclaration" asp-controller="Order" class="btn-decleration mr-2" style="background-color: #1D85FE;
+        border-color: #1D85FE;">BƏYAN ET</a></li>
+                                <li class="nav_item"><a asp-action="CreateOrder" asp-controller="Order" class="btn-order">SİFARİŞ ET</a></li>
+
+                                }
+                            </ul>
+                        </div>
+                    </nav>
+                </header>
+            </div>
         <!-- ========== end of header navigation bar section ========== -->
         <!-- ========== main section ========== -->
         <main role="main" class="w-100">

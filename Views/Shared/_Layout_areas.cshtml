@@ -1,0 +1,99 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<CustomAppUser> signInManager
+@inject UserManager<CustomAppUser> userManager
+
+
+@*@{ var admin = await userManager.GetUserAsync(User);
+    var displayName = "";}
+
+@if (signInManager.IsSignedIn(User))
+{
+    displayName = admin.UserName;
+}*@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/b35a418092.js" crossorigin="anonymous"></script>
+    <title>Limak.az Türkiyə və Amerikadan çatdırılma xidməti</title>
+    <link rel="stylesheet" href="~/lib/bootstrap-4.4.1-dist/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+</head>
+
+<body>
+    <div class="container-body position-relative">
+        <!-- ========== header navigation bar section ========== -->
+        <div class="container-header">
+            <!-- =============== Static header and nav =========================================== -->
+            <header id="static-header" class="static d-lg-block d-md-none d-sm-none w-100">
+                <nav class="navbar nav-bottom w-100 p-0">
+                    <div class="container h-100">
+                        <ul class="main_logo d-flex justify-content-between align-items-center static-nav navbar navbar-expand-lg list-unstyled p-0 mb-0 h-100">
+                            <li class="logo nav_item">
+                                <a href="" class="nav_link w-100 d-block">
+                                    <img src="~/images/Limak-Logo.png" alt="">
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar_main d-flex justify-content-between align-items-center static-nav navbar navbar-expand-lg list-unstyled p-0 mb-0 h-100">
+                            <li class="nav_item d-flex justify-content-center align-items-center h-100">
+                                <a asp-action="UserList" asp-controller="Home"
+                                   class="h-100">İstifadəçilər</a>
+                            </li>
+                            <li class="nav_item d-flex justify-content-center align-items-center h-100">
+                                <a asp-action="Orders" asp-controller="Home"
+                                   class="h-100">Sifarişlər</a>
+                            </li>
+                            <li class="nav_item d-flex justify-content-center align-items-center h-100">
+                                <a asp-action="Declarations" asp-controller="Home"
+                                   class="h-100">Bəyannamələr</a>
+                            </li>
+                            <li class="nav_item d-flex justify-content-center align-items-center h-100 admin-li">
+                                <a href=""
+                                   class="h-100">Admin</a>
+                            </li>
+                            <ul class="d-none position-absolute text-center list-unstyled p-0 mb-0 h-auto admin_menu"
+                                style="background-color: #fff;top: 80px;right: -6px;">
+                                <li class="d-flex justify-content-center align-items-center">
+                                    <a asp-action="Managers" asp-controller="Home"
+                                       class="h-100 w-100 pb-0 pt-0">Adminlər</a>
+                                </li>
+                                <li class="d-flex justify-content-center align-items-center">
+                                    <a asp-action="CreateManager" asp-controller="Account"
+                                       class="h-100 w-100 pb-0 pt-0">Yeni admin əlavə et</a>
+                                </li>
+                                <li class="d-flex justify-content-center align-items-center">
+                                    <a href=""
+                                       class="h-100 w-100 pb-0 pt-0">Tənzimləmələr</a>
+                                </li>
+                                <li class="d-flex justify-content-center align-items-center">
+                                    <a asp-action="LogOut" asp-controller="Account"
+                                       class="h-100 w-100 pb-0 pt-0">Hesabdan çıx</a>
+                                </li>
+                            </ul>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+        </div>
+        <!-- ========== end of header navigation bar section ========== -->
+        <!-- ========== main section ========== -->
+        <main role="main" class="w-100">
+            @RenderBody()
+        </main>
+        <!-- ========== end of main section ========== -->
+    </div>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/bootstrap-4.4.1-dist/bootstrap.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="~/js/script.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+
+</html>

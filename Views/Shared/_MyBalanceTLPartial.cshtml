@@ -1,0 +1,103 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<CustomAppUser> signInManager
+@inject UserManager<CustomAppUser> userManager
+@model IEnumerable<UserBalance>
+
+@{ ViewData["Title"] = "Balance";}
+
+@{ var user = await userManager.GetUserAsync(User);}
+
+<div class="row userPanelBody  balance-block">
+    <div class="col-xs-12 block userPanelBlock row d-flex flex-wrap p-0">
+        <div class="col-5 col-md-5 col-sm-5 col-xs-12 p-0">
+            <div class="balance">
+                <img src="asserts/images/balans-mob.png" alt="balans"
+                     class="img-responsive w-100 h-100">
+                <div class="balance-count">
+                    <span>Balansım</span><br><span class="count">@ViewBag.balanceTL<sup></sup></span>
+                </div>
+                <div class="balance-date">
+                    <span>Son əlavə tarixi</span><br>
+                </div>
+                <div class="balance-text">
+                    Azərbaycana çatdırılma haqqının ödənilməsi və online kuryer
+                    sifarişi üçün balansınızı artıra bilərsiniz.
+                    <p class="mb-0 mt-2 w-100">
+                        <b>ARTIRILAN BALANS GERİ QAYTARILMIR.</b>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-7 col-md-7 col-sm-7 col-xs-12 right-side rightBalance pr-0">
+            <div class="right-top block">
+                <h4>ÖDƏNİŞ ÜÇÜN BALANS ARTIMI</h4>
+                <form method="POST" asp-action="IncreaseBalance" asp-controller="BalanceController">
+                    <div class="border-radius d-flex justify-content-between align-items-center">
+                        <div class="input-group increaseDiv mb-0 mr-3">
+                            <label class="lbl_pay mb-0">
+                                <input placeholder=" " name="amount" step=".01" min="1" max="10000" required="required" type="number"
+                                       class="form-control inputText">
+                                <span class="input_span">Məbləğ TL</span>
+                            </label>
+                        </div>
+                        <div class="input-group increaseDiv mb-0 mr-3">
+                            <label class="lbl_pay mb-0">
+                                <input placeholder=" " required="required" type="number"
+                                       name="amount" readonly="readonly"
+                                       class="form-control inputText">
+                                <span class="input_span">Məbləğ AZN</span>
+                            </label>
+                        </div>
+                        <button type="submit"
+                                class="border-btn btn-effect btn_pay  increaseDiv ml-4">
+                            Balansı artır
+                        </button>
+                    </div>
+                </form>
+                <div class="d-flex justify-content-between align-items-center mb-3 mt-4">
+                    <span class="range-count">min: 1 USD - max: 50 USD</span>
+                    <div class="card_logolist">
+                        <img src="asserts/images/visa-logo-master.png" alt=" visa">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 p-0 increase-balance">
+            <div class="col-xs-12">
+                <div class="block d-flex">
+                    <div class="col-md-10 col-sm-9 col-xs-9">
+                        <h4>Milli Ön üzərindən balansınızı artırın</h4>
+                        <form>
+                            <div class="input-group border-radius mb-4 mt-4">
+                                <label>
+                                    <input type="text" placeholder="Hesab Nömrəsi: "
+                                           readonly="readonly"
+                                           class="form-control inputText">
+                                </label>
+                            </div>
+                        </form>
+                        <p>
+                            MilliÖN terminalına yaxınlaşırsınız, "Çatdırılma xidməti"
+                            bölməsinə daxil olub, "Limak.az" bölməsinə keçid edirsiniz.
+                            Daşınma və kuryer xidmət haqqını ödəyə bilmək üçün "limak.az
+                            AZN" xanasını seçirsiniz. Açılan xanada yuxarıdakı hesab
+                            nömrənizi yığaraq "davam et" düyməsini sıxırsınız.
+                            Çatdırılma və kuryer xidməti üçün lazım olan məbləği daxil
+                            edib təsdiqləyirsiniz. Əməliyyatı bitirdikdən sonra məbləğ
+                            dərhal limak.az saytındakı şəxsi kabinetdəki balansınızda
+                            görünəcək.
+                            <br><br>
+                            Qeyd: Çatdırılma balansı ilə Türkiyədən alış-veriş etmək
+                            mümkün deyil! AZN balansından TRY balansına pul transferi
+                            mümkün deyil!
+                        </p>
+                    </div>
+                    <div class="col-md-2 col-sm-3 col-xs-3">
+                        <img src="asserts/images/terminal.png" alt="terminal"
+                             class="img-responsive center-block">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

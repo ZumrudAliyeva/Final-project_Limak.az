@@ -1,6 +1,6 @@
 using System;
 
-namespace Final_project_Limak.az.Models
+namespace Limak.az.Models
 {
     public class ErrorViewModel
     {

@@ -1,0 +1,131 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<CustomAppUser> signInManager
+@inject UserManager<CustomAppUser> userManager
+@model IEnumerable<Declaration>
+
+@{ ViewData["Title"] = "UserPanel";}
+
+@{ var user = await userManager.GetUserAsync(User);}
+
+<div class="row userPanelBody declaration-block d-block">
+    @*<div class="col-xs-12 order-body">
+        <div class="block p-0 mb-4">
+            <ul class="nav nav-tabs w-100 justify-content-start">
+                <li class="d-flex justify-content-center align-items-center position-relative active">
+                    <img src="~/images/order-turkey.png" alt="">
+                    <a href="" class="img1 w-100">Türkiyə</a>
+                </li>
+                <li class="d-flex justify-content-center align-items-center position-relative">
+                    <img src="~/images/order-US.png" alt="">
+                    <a href="#tab2" class="img2 w-100">Amerika</a>
+                </li>
+            </ul>
+        </div>
+    </div>*@
+    <div class="col-xs-12" id="tabContent">
+        <div class="block userPanelBlock">
+            <div class="block-head pl-0 pr-0 d-flex justify-content-between align-items-center">
+                <h3 class="col-9 m-0">Bağlamalarım</h3>
+                    <select class="packList col-3 form-control list-unstyled inputText p-0 tag">
+                        <option class="active-li"><a aria-current="page" href="#/orders/0">Hamısı (@ViewBag.AllDeclarations)</a></option>
+                        <option><a href="#/declarations/1">Sifariş verildi(@ViewBag.DeclaredDeclarations)</a></option>
+                        <option><a href="#/declarations/2">Xarici anbarda (@ViewBag.InForeignWarehouseDeclarations)</a></option>
+                        <option><a href="#/declarations/3">Yolda (@ViewBag.OnTheWayDeclarations)</a></option>
+                        <option><a href="#/declarations/5">Gömrük yoxlanılmasında (@ViewBag.InCustomsInspectionDeclarations)</a></option>
+                        <option><a href="#/declarations/4">Yerli anbarda (@ViewBag.InLocalWarehouseDeclarations)</a></option>
+                        <option><a href="#/declarations/5">Kuryer çatdırmasında (@ViewBag.ByCourierDeliveryDeclarations)</a></option>
+                        <option><a href="#/declarations/5">Təhvil verildi (@ViewBag.DeliveredDeclarations)</a></option>
+                    </select>
+            </div>
+            <div class="block-inner">
+                <div class="select-all mb-3">
+                    <label class="check-button">
+                        <span class="check-text">Hamısını seç</span>
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="declarationsList">
+                    <div class="table-responsive resizable-table">
+                        <table class="table table-bordered w-100">
+                            <thead class="w-100">
+                                <tr>
+                                    <th scope="col">Ölkə</th>
+                                    <th scope="col">Sifarişi izləmə kodu</th>
+                                    <th scope="col">Sifarişin verilmə tarixi</th>
+                                    <th scope="col">Məhsulun növü</th>
+                                    <th scope="col">Miqdar</th>
+                                    <th scope="col">Məhsulun qiyməti</th>
+                                    <th scope="col">Çatdırılma qiyməti</th>
+                                    <th scope="col">Qeyd</th>
+                                    <th scope="col">Ödəmə</th>
+                                    <th scope="col">Sil</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                    @foreach (var item in Model)
+                    {
+                                <tr scope="row">
+                                    <td>
+                                        <div class="d-flex">
+                                            @if (item.CountryId == 1)
+                                            {
+                                <img src="~/images/flg-tr.png" /> }
+                            else
+                            {
+                                <img src="~/images/flg-usa.png" />}
+                                        </div>
+                                    </td>
+                                    <td> @item.TrackingCode</td>
+                                    <td> @item.DeclarationDate</td>
+                                    <td> @item.ProductType</td>
+                                    <td> @item.Quantity</td>
+                                    <td> @item.ProductPrice</td>
+                                    <td> @item.ShippingPrice</td>
+                                    <td> @item.Description</td>
+                                    <td>
+                                        @if (item.DeclarationStatusId == 1)
+                                        {
+                                <a asp-action="PayForDeclaration" asp-controller="Order" asp-route-id="@item.Id" style="color:white;" class="btn btn-warning mr-1">Ödə</a> }
+                            else
+                            {
+                                <a href="" style=" cursor: not-allowed;opacity: 0.5;" disabled class="btn btn-primary">Ödənilib</a>}
+                                    </td>
+                                    <td>
+                                        <a asp-action="DeleteDeclaration" asp-controller="Order" asp-route-id="@item.Id" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete? This action cannot be undone.');">Sil</a>
+                                    </td>
+                                </tr>
+}}
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+                <div class="sum">
+                    <span>Çatdırılma haqqı</span>
+                    <p></p>
+                    <p>0.00 AZN</p>
+                </div>
+                <div class="pack-block-inner row">
+                    <div class="col-3 mr-3">
+                        <form asp-action="PayForDeclaration">
+                            <button type="button" class="btn-effect">
+                                Balansdan Ödəniş et
+                            </button>
+                        </form>
+                    </div>
+                    <div class="col-3">
+                        <form action="" method="post">
+                            <button type="button" class="btn-effect">
+                                Kartdan Ödəniş et
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

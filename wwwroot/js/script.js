@@ -10,17 +10,17 @@ $(function () {
     });
 
 /*============= register =============== */
-$(document).on('click', 'button#gender', function () {
-    $('ul.list_gender').toggleClass('active');
-})
-$(document).on('click', 'ul.list_gender li', function () {
-    let selectedVal = $(this).find('a').attr('data-value');
-    $(`select[name="gender"] option`).attr('selected', false);
-    let selectedoption = $(`select[name="gender"] option[value="${selectedVal}"]`).attr('selected', true);
-    $('ul.list_gender').toggleClass('active');
-    $('button#gender').text(selectedoption.text());
-    console.log(selectedoption);
-})
+//$(document).on('click', 'button#gender', function () {
+//    $('ul.list_gender').toggleClass('active');
+//})
+//$(document).on('click', 'ul.list_gender li', function () {
+//    let selectedVal = $(this).find('a').attr('data-value');
+//    $(`select[name="gender"] option`).attr('selected', false);
+//    let selectedoption = $(`select[name="gender"] option[value="${selectedVal}"]`).attr('selected', true);
+//    $('ul.list_gender').toggleClass('active');
+//    $('button#gender').text(selectedoption.text());
+//    console.log(selectedoption);
+//})
 
 $(document).on('focus', 'input.inputText', function () {
     $(this).addClass('active');
@@ -301,7 +301,11 @@ $(document).on('click', 'ul.userPanelList li', function () {
     }
 
 
+////////////////////////////////////////////////////////////////////////
 
+    //$(document).on('click', 'div.packageList', function () {
+    //    $('div.packageList ul').toggleClass('d-none');
+    //});
 
 
 })

@@ -16,7 +16,7 @@ namespace Limak.az.Models
         public string TrackingCode { get; set; }
         public string Link { get; set; }
         public DateTime DeclarationDate { get; set; }
-        [Required]
+        //[Required]
         public string FileName { get; set; }
         [NotMapped]
         public IFormFile File { get; set; }

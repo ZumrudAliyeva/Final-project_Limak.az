@@ -36,17 +36,19 @@ namespace Limak.az.Contexts
 
             modelBuilder.Entity<DeclarationStatus>().HasData(
                    new DeclarationStatus() { Id = 1, Name = "Sifariş verildi" },
-                   new DeclarationStatus() { Id = 2, Name = "Xarici anbarda" },
-                   new DeclarationStatus() { Id = 3, Name = "Yolda" },
-                   new DeclarationStatus() { Id = 4, Name = "Gömrük yoxlanışında" },
-                   new DeclarationStatus() { Id = 5, Name = "Anbarda" },
-                   new DeclarationStatus() { Id = 6, Name = "Kuryer çatdırması" },
-                   new DeclarationStatus() { Id = 7, Name = "Təhvil verildi" }
+                   new DeclarationStatus() { Id = 2, Name = "Ödənildi" },
+                   new DeclarationStatus() { Id = 3, Name = "Xarici anbarda" },
+                   new DeclarationStatus() { Id = 4, Name = "Yolda" },
+                   new DeclarationStatus() { Id = 5, Name = "Gömrük yoxlanışında" },
+                   new DeclarationStatus() { Id = 6, Name = "Anbarda" },
+                   new DeclarationStatus() { Id = 7, Name = "Kuryer çatdırması" },
+                   new DeclarationStatus() { Id = 8, Name = "Təhvil verildi" }
                );
 
             modelBuilder.Entity<Country>().HasData(
                    new Country() { Id = 1, Name = "USA" },
-                   new Country() { Id = 2, Name = "Turkey" }
+                   new Country() { Id = 2, Name = "Turkey" },
+                   new Country() { Id = 3, Name = "Azerbaijan" }
              );
             modelBuilder.Entity<Currency>().HasData(
                    new Currency() { Id = 1, Name = "USD" },

@@ -8,7 +8,7 @@ namespace Limak.az.Interfaces
     {
         Task<bool> Create(OrderViewModel orderViewModel);
         Task Delete(int id);
-        bool Pay(int id, string userId);
+        //bool Pay(int id, string userId);
         Task<Order> GetOrderById(int id);
 
     }

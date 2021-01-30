@@ -54,7 +54,54 @@ namespace Limak.az.Repos
             var result = false;
             var userbalance = _context.UserBalances.FirstOrDefault(x => x.UserId == userId && x.CurrencyId == currencyId);
             var balance = userbalance.Balance;
-            var amount = declaration.ProductPrice;
+            var amount = declaration.ShippingPrice;
+            if (declaration.CountryId == 2)
+            {
+                if (declaration.ProductPrice > 0 && declaration.ProductWeight <= 0.25m)
+                {
+                    amount = 2.00m * declaration.Quantity;
+                }
+                else if (declaration.ProductPrice > 0.25m && declaration.ProductWeight <= 0.5m)
+                {
+                    amount = 3.00m * declaration.Quantity;
+                }
+                else if (declaration.ProductPrice > 0.5m && declaration.ProductWeight <= 0.7m)
+                {
+                    amount = 4.00m * declaration.Quantity;
+                }
+                else if (declaration.ProductPrice > 0.7m && declaration.ProductWeight <= 1m)
+                {
+                    amount = 4.5m * declaration.Quantity;
+                }
+                else if (declaration.ProductWeight <= 1m)
+                {
+                    amount = 4.5m * declaration.Quantity;
+                }
+            }
+            else
+            {
+                if (declaration.ProductPrice > 0 && declaration.ProductWeight <= 0.25m)
+                {
+                    amount = 1.99m * declaration.Quantity;
+                }
+                else if (declaration.ProductPrice > 0.25m && declaration.ProductWeight <= 0.5m)
+                {
+                    amount = 2.99m * declaration.Quantity;
+                }
+                else if (declaration.ProductPrice > 0.5m && declaration.ProductWeight <= 0.7m)
+                {
+                    amount = 3.99m * declaration.Quantity;
+                }
+                else if (declaration.ProductPrice > 0.7m && declaration.ProductWeight <= 1m)
+                {
+                    amount = 5.99m * declaration.Quantity;
+                }
+                else if(declaration.ProductWeight <= 1m)
+                {
+                    amount = 5.99m * declaration.Quantity;
+                }
+            }
+
             if (declaration.DeclarationStatusId == 1)
             {
                 if (amount <= balance)

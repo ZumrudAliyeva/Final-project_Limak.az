@@ -79,15 +79,39 @@ namespace Limak.Controllers
                 var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 var prPrice = orderViewModel.ProductPrice;
                 var cargoPrice = orderViewModel.CargoPrice;
+                var prResult = orderViewModel.PriceResult;
                 orderViewModel.UserId = userId;
                 orderViewModel.OrderStatusId = 1;
                 orderViewModel.CountryId = 2;
-                orderViewModel.PriceResult = prPrice + cargoPrice;
+                var amount = prPrice + cargoPrice;
+                prResult = amount + (amount * (5m/100m));
 
                 var result = await orderRepository.Create(orderViewModel);
 
                 if (result == true)
                 {
+                    ///////////////////////////////////////////////////////////////////////////////////////
+                    var currencyId = 2;
+                    if (orderViewModel.CountryId == 2)
+                    {
+                        currencyId = 2;
+                    }
+                    else
+                    {
+                        currencyId = 3;
+                    }
+                    //var result = false;
+                    var userbalance = context.UserBalances.FirstOrDefault(x => x.UserId == userId && x.CurrencyId == currencyId);
+                    var balance = userbalance.Balance;
+
+                    if (prResult <= balance)
+                    {
+                        userbalance.Balance = balance - prResult;
+                        context.UserBalances.Update(userbalance);
+                        context.SaveChanges();
+
+                    }
+                    ///////////////////////////////////////////////////////////////////////////////////
                     return RedirectToAction("UserPanel", "Home");
                 }
                 else
@@ -99,34 +123,36 @@ namespace Limak.Controllers
         }
 
 
+        //public IActionResult PayForOrder(int id)
+        //{
+        //    var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        //    var result = orderRepository.Pay(id, userId);
+        //    if (result == true)
+        //    {
+        //        return RedirectToAction("UserPanel", "Home");
+        //    }
+        //    else
+        //    {
+        //        TempData["message"] = "Balansda kifayət qədər vəsait yoxdur.";
+        //        return RedirectToAction("UserPanel", "Home");
+        //    }
+
+        //}
+
+
+
         //[HttpGet]
         //public IActionResult DeleteOrder()
         //{
         //    return View();
         //}
 
-        [HttpPost]
+        //[HttpPost]
         public async Task<IActionResult> DeleteOrder(int id)
         {
             await orderRepository.Delete(id);
 
             return RedirectToAction("UserPanel", "Home");
-        }
-
-        public IActionResult PayForOrder(int id)
-        {
-            var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var result = orderRepository.Pay(id, userId);
-            if (result == true)
-            {
-                return RedirectToAction("UserPanel", "Home");
-            }
-            else
-            {
-                TempData["message"] = "Balansda kifayət qədər vəsait yoxdur.";
-                return RedirectToAction("UserPanel", "Home");
-            }
-
         }
 
 
@@ -147,31 +173,24 @@ namespace Limak.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateDeclaration(DeclarationViewModel declarationViewModel)
         {
-            //ViewBag.Warehouse = context.Warehouses.Select(
-            //    c => new SelectListItem()
-            //    {
-            //        Text = c.Name,
-            //        Value = c.Id.ToString()
-            //    }).ToList();
-
-            var newFileName = "";
-            if (declarationViewModel.File != null)
-            {
-                newFileName =
-             $"{Path.GetFileNameWithoutExtension(declarationViewModel.File.FileName)}" +
-             $"-{DateTime.Now.ToString("MM-dd-yyyy-HH-mm-ss")}" +
-             $"{Path.GetExtension(declarationViewModel.File.FileName)}";
-
-                var rootPath = Path.Combine(webHost.WebRootPath, "images", newFileName);
-                using (var fileStream = new FileStream(rootPath, FileMode.Create))
-                {
-                    declarationViewModel.File.CopyTo(fileStream);
-                }
-
-            }
-
             if (ModelState.IsValid)
             {
+                var newFileName = "";
+                if (declarationViewModel.File != null)
+                {
+                    newFileName =
+                 $"{Path.GetFileNameWithoutExtension(declarationViewModel.File.FileName)}" +
+                 $"-{DateTime.Now.ToString("MM-dd-yyyy-HH-mm-ss")}" +
+                 $"{Path.GetExtension(declarationViewModel.File.FileName)}";
+
+                    var rootPath = Path.Combine(webHost.WebRootPath, "images", newFileName);
+                    using (var fileStream = new FileStream(rootPath, FileMode.Create))
+                    {
+                        declarationViewModel.File.CopyTo(fileStream);
+                    }
+
+                }
+
                 declarationViewModel.FileName = newFileName;
 
                 var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
@@ -196,6 +215,8 @@ namespace Limak.Controllers
 
             return View(declarationViewModel);
         }
+
+
 
         public async Task<IActionResult> DeleteDeclaration(int id)
         {

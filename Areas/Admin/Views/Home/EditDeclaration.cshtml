@@ -1,14 +1,10 @@
-﻿@model Limak.az.ViewModels.DeclarationViewModel
+﻿@model Limak.az.Models.Declaration
 
 @{
     ViewData["Title"] = "EditDeclaration";
     Layout = "~/Views/Shared/_Layout_areas.cshtml";
 }
 
-<h1>EditDeclaration</h1>
-
-<h4>DeclarationViewModel</h4>
-<hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="EditDeclaration">
@@ -75,12 +71,16 @@
             </div>
             <div class="form-group">
                 <label asp-for="DeclarationStatusId" class="control-label"></label>
-                <input asp-for="DeclarationStatusId" class="form-control" />
+                <select id="warehouseDropdown" asp-for="DeclarationStatusId" asp-items="@ViewBag.Status" class="form-control">
+                    <option></option>
+                </select>
                 <span asp-validation-for="DeclarationStatusId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="WarehouseId" class="control-label"></label>
-                <input asp-for="WarehouseId" class="form-control" />
+                <select id="warehouseDropdown" asp-for="WarehouseId" asp-items="@ViewBag.Warehouse" class="form-control">
+                    <option></option>
+                </select>
                 <span asp-validation-for="WarehouseId" class="text-danger"></span>
             </div>
             <div class="form-group">

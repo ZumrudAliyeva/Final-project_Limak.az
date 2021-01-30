@@ -15,7 +15,7 @@ namespace Limak.az.ViewModels
         public string Email { get; set; }
         [Required]
         [RegularExpression("([+994]{4})[- ]?([50,51,55,70,77]{2})[- ]?([0-9]{3})[- ]?([0-9]{2})[- ]?([0-9]{2})", ErrorMessage = "Duzgun telefon nomresi +994XXXXXXXXX")]
-        public string Phone { get; set; }
+        public string PhoneNumber { get; set; }
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }

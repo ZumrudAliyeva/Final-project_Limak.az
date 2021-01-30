@@ -41,37 +41,37 @@ namespace Limak.az.Repos
 
         }
 
-        public bool Pay(int id, string userId)
-        {
-            var currencyId = 2;
-            var order = _context.Orders.Find(id);
-            if (order.CountryId == 2)
-            {
-                currencyId = 2;
-            }
-            else
-            {
-                currencyId = 3;
-            }
-            var result = false;
-            var userbalance = _context.UserBalances.FirstOrDefault(x => x.UserId == userId && x.CurrencyId == currencyId);
-            var balance = userbalance.Balance;
-            var amount = order.PriceResult;
-            if (order.OrderStatusId == 1)
-            {
-                if (amount <= balance)
-                {
-                    order.OrderStatusId = 2;
-                    _context.Orders.Update(order);
-                    userbalance.Balance = balance - amount;
-                    _context.UserBalances.Update(userbalance);
-                    _context.SaveChanges();
+        //public bool Pay(int id, string userId)
+        //{
+        //    var currencyId = 2;
+        //    var order = _context.Orders.Find(id);
+        //    if (order.CountryId == 2)
+        //    {
+        //        currencyId = 2;
+        //    }
+        //    else
+        //    {
+        //        currencyId = 3;
+        //    }
+        //    var result = false;
+        //    var userbalance = _context.UserBalances.FirstOrDefault(x => x.UserId == userId && x.CurrencyId == currencyId);
+        //    var balance = userbalance.Balance;
+        //    var amount = order.PriceResult;
+        //    if (order.OrderStatusId == 1)
+        //    {
+        //        if (amount <= balance)
+        //        {
+        //            order.OrderStatusId = 2;
+        //            _context.Orders.Update(order);
+        //            userbalance.Balance = balance - amount;
+        //            _context.UserBalances.Update(userbalance);
+        //            _context.SaveChanges();
 
-                    result = true;
-                }
-            }
+        //            result = true;
+        //        }
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
     }
 }

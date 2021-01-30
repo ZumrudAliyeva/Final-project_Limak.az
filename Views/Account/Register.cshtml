@@ -5,87 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@*<h1>Register</h1>
-
-    <h4>RegisterViewModel</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="Register">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Name" class="control-label"></label>
-                    <input asp-for="Name" class="form-control" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Surname" class="control-label"></label>
-                    <input asp-for="Surname" class="form-control" />
-                    <span asp-validation-for="Surname" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Email" class="control-label"></label>
-                    <input asp-for="Email" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Phone" class="control-label"></label>
-                    <input asp-for="Phone" class="form-control" />
-                    <span asp-validation-for="Phone" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Password" class="control-label"></label>
-                    <input asp-for="Password" class="form-control" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ConfirmPassword" class="control-label"></label>
-                    <input asp-for="ConfirmPassword" class="form-control" />
-                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="IDSerialNumber" class="control-label"></label>
-                    <input asp-for="IDSerialNumber" class="form-control" />
-                    <span asp-validation-for="IDSerialNumber" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Citizenship" class="control-label"></label>
-                    <input asp-for="Citizenship" class="form-control" />
-                    <span asp-validation-for="Citizenship" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Birthdate" class="control-label"></label>
-                    <input asp-for="Birthdate" class="form-control" autocomplete="off"  type="text" onfocus="(this.type='date')" />
-                    <span asp-validation-for="Birthdate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Gender" class="control-label"></label>
-                    <input asp-for="Gender" class="form-control" />
-                    <span asp-validation-for="Gender" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="FINkode" class="control-label"></label>
-                    <input asp-for="FINkode" class="form-control" />
-                    <span asp-validation-for="FINkode" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Address" class="control-label"></label>
-                    <input asp-for="Address" class="form-control" />
-                    <span asp-validation-for="Address" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>*@
-
-
-
 <main class="w-100">
     <div class="container-main w-100">
         <section class="w-100">
@@ -136,7 +55,7 @@
                                 </div>
                                 <div class="col-xs-6 col-6 pr-0">
                                     <div class=" input-group tel-edit">
-                                        <input asp-for="Phone" value="" type="text" class="form-control inputText"
+                                        <input asp-for="PhoneNumber" value="" type="text" class="form-control inputText"
                                                placeholder="Telefon * ">
                                         @*<span class="input_span">Telefon *</span>*@
                                         @*<p class="input_span">+994</p>*@
@@ -189,21 +108,21 @@
                                         <input asp-for="Birthdate" class="form-control" autocomplete="off" type="text" onfocus="(this.type='date')" />
                                     </div>
                                     <div class=" gender input-group col-6 pr-0">
-                                        <select asp-for="Gender" name="gender" class="form-control selectpicker d-none" title="Cinsi *">
-                                            <option class="bs-title-option" value=""></option>
+                                        <select asp-for="Gender" name="gender" class="form-control inputText" title="Cinsi *">
+                                            <option class="bs-title-option" value="">Cinsi *</option>
                                             <option value="qadin">Qadın</option>
                                             <option value="kisi">Kişi</option>
                                         </select>
-                                        <button id="gender"
+                                        @*<button id="gender"
                                                 class="btn w-100 position-relative btn-default text-left calc_place">
-                                            qadın
+                                            Cinsi *
                                         </button>
                                         <img src="~/images/chevron-small.png" alt=""
                                              class="position-absolute calc-chevron">
                                         <ul class="dropdown_menu_calc position-absolute list-unstyled list_gender">
                                             <li><a href="" class="d-block w-100" data-value="qadin">qadın</a></li>
                                             <li><a href="" class="d-block w-100" data-value="kisi">kişi</a></li>
-                                        </ul>
+                                        </ul>*@
                                     </div>
                                 </div>
                             </div>
@@ -234,9 +153,7 @@
                                     <span class="checkmark"></span>
                                 </div>
                                 <div class="button_part">
-                                    <button type="submit" class="confirm_btn">
-                                        <span>TƏSDİQ ET</span>
-                                    </button>
+                                    <input type="submit" class="confirm_btn" value="TƏSDİQ ET"/>
                                 </div>
                             </div>
                         </form>

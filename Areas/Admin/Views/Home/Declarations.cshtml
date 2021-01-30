@@ -10,46 +10,46 @@
     <table class="table">
         <thead>
             <tr>
-                <th>
+                <th scope="col">
                     Mağaza
                 </th>
-                <th>
+                <th scope="col">
                     Məhsulun növü
                 </th>
-                <th>
+                <th scope="col">
                     Miqdar
                 </th>
-                <th>
+                <th scope="col">
                     Məhsulun qiyməti
                 </th>
-                <th>
+                <th scope="col">
                     Sifarişi izləmə kodu
                 </th>
-                <th>
+                <th scope="col">
                     @Html.DisplayNameFor(model => model.Link)
                 </th>
-                <th>
+                <th scope="col">
                     Sifarişin verilmə tarixi
                 </th>
-                <th>
+                <th scope="col">
                     Qeyd
                 </th>
-                <th>
+                <th scope="col">
                     Çatdırılma qiyməti
                 </th>
-                <th>
+                <th scope="col">
                     Məhsulun çəkisi
                 </th>
-                <th>
+                <th scope="col">
                     Status
                 </th>
-                <th>
+                <th scope="col">
                     Çatdırılma ofisi
                 </th>
-                <th>
+                <th scope="col">
                     Müştəri kodu
                 </th>
-                <th>
+                <th scope="col">
                     Ölkə
                 </th>
                 <th></th>
@@ -95,7 +95,7 @@
                     @Html.DisplayFor(modelItem => item.Warehouse.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.UserId)
+                    @Html.DisplayFor(modelItem => item.User.CustomerId)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Country.Name)
@@ -103,16 +103,13 @@
                 <td>
                     <div class="d-flex flex-nowrap">
                         <a asp-action="EditDeclaration" asp-controller="Home" asp-route-id="@item.Id" class="btn btn-warning" style="color:white;">Dəyişiklik et</a>
-                        <a class="btn btn-secondary mr-1 " asp-action="DeclarationDetails" asp-route-id="@item.Id" asp-controller="Home"><i data-id="@item.Id" class="fas fa-info-circle orderdetailsId"></i></a>
-                        <a asp-action="DeleteOrder" asp-route-id="@item.Id" class="btn btn-danger" data-title="Delete" onclick="return confirm('Are you sure you want to delete? This action cannot be undone.');"><i class="fas fa-trash"></i></a>
+                        <a class="btn btn-secondary mr-1 " asp-action="DeclarationDetails" asp-controller="Home" asp-area="Admin" asp-route-id="@item.Id"><i data-id="@item.Id" class="fas fa-info-circle orderdetailsId"></i></a>
+                        <a asp-action="DeleteDeclaration" asp-controller="Home" asp-route-id="@item.Id" class="btn btn-danger" data-title="Delete" onclick="return confirm('Are you sure you want to delete? This action cannot be undone.');"><i class="fas fa-trash"></i></a>
                     </div>
                 </td>
             </tr>
 }
         </tbody>
     </table>
-</div>
-<div class="modalDiv">
-
 </div>
 

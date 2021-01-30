@@ -70,9 +70,9 @@ namespace Limak.az.Controllers
 
                     SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
                     client.UseDefaultCredentials = false;
-                    client.Credentials = new NetworkCredential("limakmmc.test@gmail.com", "Password_1303");
+                    client.Credentials = new NetworkCredential("limakmmctest@gmail.com", "Password1303");
 
-                    MailMessage message = new MailMessage(new MailAddress("limakmmc.test@gmail.com"), new MailAddress(userViewModel.Email));
+                    MailMessage message = new MailMessage(new MailAddress("limakmmctest@gmail.com"), new MailAddress(userViewModel.Email));
                     client.EnableSsl = true;
                     message.IsBodyHtml = true;
                     message.Subject = "Email Confirmation";
@@ -83,10 +83,10 @@ namespace Limak.az.Controllers
                         "<input name='Email' value='" + user.Email + "' type='hidden'/>" +
                        " <div style = 'width: 600px; display: flex; align-items: center; justify-content: center;' >" +
                        " <div style ='font-size: 15px;text-align: center;'>" +
-                        "<h3> Qeydiyyatınızı təsdiqləyin</h3>" +
+                        "<h3> Emailinizi təsdiqləyin</h3>" +
                        " <p> Hörmətli  " + userViewModel.Name + " " + userViewModel.Surname + ", </p> " +
                        "<p>Limak.az saytındakı qeydiyyatınızı təsdiqləmək üçün zəhmət olmasa klikləyin.</p> " +
-                        "<input style='cursor: pointer; font-weight: 800; font-size: 16px; color: white; background-color: #005eb5cc; padding: 14px 24px; border-radius: 5px; border: #005eb5cc;'  type='submit' value='EmailConfrimation'/></form>" +
+                        "<input style='cursor: pointer; font-weight: 800; font-size: 16px; color: white; background-color: #f95732; padding: 14px 24px; border-radius: 5px; border: #f95732;'  type='submit' value='EmailConfrimation'/></form>" +
                      " </div> </div>";
 
                     await client.SendMailAsync(message);
@@ -113,7 +113,7 @@ namespace Limak.az.Controllers
 
             if (user == null)
             {
-                TempData["Message"] = "Email yanlishdir";
+                TempData["Message"] = "Email yanlışdır";
                 return RedirectToAction("Logout", "Account");
             }
             var result = await userManager.ConfirmEmailAsync(user, token);
@@ -123,7 +123,7 @@ namespace Limak.az.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            TempData["Message"] = "Email yanlishdir";
+            TempData["Message"] = "Email yanlışdır";
             return RedirectToAction("Logout", "Account");
         }
 

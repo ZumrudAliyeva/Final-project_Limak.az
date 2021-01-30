@@ -10,13 +10,10 @@
         <thead>
             <tr>
                 <th>
-                    Ad Soyad
+                    @Html.DisplayNameFor(model => model.Id)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Email)
-                </th>
-                <th>
-                    Adres
                 </th>
                 <th></th>
             </tr>
@@ -26,19 +23,16 @@
             {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
+                    @Html.DisplayFor(modelItem => item.Id)
 
-                    @Html.DisplayFor(modelItem => item.Surname)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Address)
-                </td>
-                <td>
                     <a asp-action="UsersDeclarations" asp-controller="Home" asp-route-id="@item.Id">Bəyannamələri</a> |
                     <a asp-action="UsersOrders" asp-controller="Home" asp-route-id="@item.Id">Sifarişləri</a> |
+                    <a asp-action="UserDetails" asp-controller="Home" asp-route-id="@item.Id"><i data-id="@item.Id" class="fas fa-info-circle orderdetailsId"></i></a>
                     <a asp-action="DeleteUser" asp-route-id="@item.Id" class="btn btn-danger"
                        data-title="Delete" onclick="return confirm('Are you sure you want to delete? This action cannot be undone.');">İstifadəçini sil</a>
                 </td>

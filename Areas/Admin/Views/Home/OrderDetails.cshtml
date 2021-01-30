@@ -1,15 +1,10 @@
-﻿@model Limak.az.ViewModels.OrderViewModel
+﻿@model Limak.az.Models.Order
 
 @{
     ViewData["Title"] = "OrderDetails";
     Layout = "~/Views/Shared/_Layout_areas.cshtml";
 }
 
-<h1>OrderDetails</h1>
-
-<div>
-    <h4>OrderViewModel</h4>
-    <hr />
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Id)
@@ -86,6 +81,5 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Orders">Geriyə</a>
 </div>

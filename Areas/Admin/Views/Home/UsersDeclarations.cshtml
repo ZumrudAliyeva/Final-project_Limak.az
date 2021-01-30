@@ -5,107 +5,110 @@
     Layout = "~/Views/Shared/_Layout_areas.cshtml";
 }
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Shop)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TrackingCode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Link)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DeclarationDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ShippingPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductWeight)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DeclarationStatus.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Warehouse.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Country.Name)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Shop)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TrackingCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Link)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DeclarationDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShippingPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductWeight)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DeclarationStatus.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Warehouse.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Country.Name)
-            </td>
-            <td>
-                <div class="d-flex flex-nowrap">
-                    <a asp-action="EditDeclaration" asp-controller="Home" asp-route-id="@item.Id" class="btn btn-warning" style="color:white;">Dəyişiklik et</a>
-                    <a class="btn btn-secondary mr-1 " asp-action="DeclarationDetails" asp-route-id="@item.Id" asp-controller="Home"><i data-id="@item.Id" class="fas fa-info-circle orderdetailsId"></i></a>
-                    <a asp-action="DeleteOrder" asp-route-id="@item.Id" class="btn btn-danger" data-title="Delete" onclick="return confirm('Are you sure you want to delete? This action cannot be undone.');"><i class="fas fa-trash"></i></a>
-                </div>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="table-responsive resizable-table table-bordered w-100">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Shop)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TrackingCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Link)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeclarationDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ShippingPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductWeight)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeclarationStatus.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Warehouse.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Country.Name)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Shop)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TrackingCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Link)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DeclarationDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShippingPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductWeight)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DeclarationStatus.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Warehouse.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Country.Name)
+                    </td>
+                    <td>
+                        <div class="d-flex flex-nowrap">
+                            <a asp-action="EditDeclaration" asp-controller="Home" asp-route-id="@item.Id" class="btn btn-warning" style="color:white;">Dəyişiklik et</a>
+                            <a class="btn btn-secondary mr-1 " asp-action="DeclarationDetails" asp-route-id="@item.Id" asp-controller="Home"><i class="fas fa-info-circle orderdetailsId"></i></a>
+                            <a asp-action="DeleteDeclaration" asp-controller="Home" asp-route-id="@item.Id" class="btn btn-danger" data-title="Delete" onclick="return confirm('Are you sure you want to delete? This action cannot be undone.');"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

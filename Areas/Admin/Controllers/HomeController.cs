@@ -63,11 +63,20 @@ namespace Limak.az.Areas.Admin.Controllers
             List<CustomAppUser> users =null;
 
             var ur = context.UserRoles.ToList();
+
             foreach (var item in ur)
             {
                users  = context.Users.Where(x=>x.Id!=item.UserId).ToList();
             }
             return View(users);
+        }
+
+        [HttpGet]
+        public IActionResult UserDetails(string id)
+        {
+            var user = context.Users.FirstOrDefault(x => x.Id == id);
+
+            return View(user);
         }
 
         public IActionResult UsersOrders(string id)
@@ -115,11 +124,10 @@ namespace Limak.az.Areas.Admin.Controllers
             return View(orders);
         }
 
-        [HttpPost]
         public IActionResult OrderDetails(int id)
         {
             var order = context.Orders.FirstOrDefault(x => x.Id == id);
-            
+
             return View(order);
         }
 
@@ -132,6 +140,8 @@ namespace Limak.az.Areas.Admin.Controllers
             return RedirectToAction("Orders");
         }
 
+
+
         public IActionResult Declarations()
         {
             var declarations = context.Declarations.OrderBy(x => x.DeclarationStatusId).
@@ -139,13 +149,14 @@ namespace Limak.az.Areas.Admin.Controllers
             return View(declarations);
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult DeclarationDetails(int id)
         {
-            var order = context.Declarations.FirstOrDefault(x => x.Id == id);
+            var declaration = context.Declarations.FirstOrDefault(x => x.Id == id);
 
-            return View(order);
+            return View(declaration);
         }
+
         public IActionResult CreateDeclaration(int id)
         {
             ViewBag.Warehouse = context.Warehouses.Select(
@@ -155,53 +166,63 @@ namespace Limak.az.Areas.Admin.Controllers
                     Value = c.Id.ToString()
                 }).ToList();
 
-            ViewBag.Status = context.DeclarationStatuses.Select(
+            //ViewBag.Status = context.DeclarationStatuses.Select(
+            //    c => new SelectListItem()
+            //    {
+            //        Text = c.Name,
+            //        Value = c.Id.ToString()
+            //    }).ToList();
+
+            var order= context.Orders.FirstOrDefault(x=>x.Id==id);
+            var declaration = new DeclarationViewModel();
+            declaration.UserId = order.UserId;
+            declaration.CountryId = order.CountryId;
+            declaration.Description = order.Description;
+            declaration.Quantity = order.Quantity;
+            declaration.Link = order.OrderLink;
+            declaration.ProductPrice = order.ProductPrice;
+            _orderRepository.Delete(order.Id);
+            return View(declaration);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateDeclaration(DeclarationViewModel declaration)
+        {
+
+            ViewBag.Warehouse = context.Warehouses.Select(
                 c => new SelectListItem()
                 {
                     Text = c.Name,
                     Value = c.Id.ToString()
                 }).ToList();
 
-            var order= context.Orders.FirstOrDefault(x=>x.Id==id);
-            var declaration = new DeclarationViewModel();
-            declaration.UserId = order.UserId;
-            declaration.CountryId = order.CountryId;
-            _orderRepository.Delete(order.Id);
-            return View(declaration);
-        }
-
-        [HttpPost]
- 
-        public async Task<IActionResult> CreateDeclaration(DeclarationViewModel declarationViewModel)
-        {
-
-            var newFileName = "";
-            if (declarationViewModel.File != null)
+            var newFileName = " ";
+            if (declaration.File != null)
             {
                 newFileName =
-             $"{Path.GetFileNameWithoutExtension(declarationViewModel.File.FileName)}" +
+             $"{Path.GetFileNameWithoutExtension(declaration.File.FileName)}" +
              $"-{DateTime.Now.ToString("MM-dd-yyyy-HH-mm-ss")}" +
-             $"{Path.GetExtension(declarationViewModel.File.FileName)}";
+             $"{Path.GetExtension(declaration.File.FileName)}";
 
                 var rootPath = Path.Combine(webHost.WebRootPath, "images", newFileName);
                 using (var fileStream = new FileStream(rootPath, FileMode.Create))
                 {
-                    declarationViewModel.File.CopyTo(fileStream);
+                    declaration.File.CopyTo(fileStream);
                 }
 
             }
 
             if (ModelState.IsValid)
             {
-                declarationViewModel.FileName = newFileName;
-                declarationViewModel.DeclarationDate = DateTime.Now;
-                declarationViewModel.DeclarationStatusId = 1;
-                declarationViewModel.TrackingCode = Guid.NewGuid().ToString().Substring(0, 8);
-                var result = await _declarationRepository.Create(declarationViewModel);
+                declaration.FileName = newFileName;
+                declaration.DeclarationDate = DateTime.Now;
+                declaration.DeclarationStatusId = 1;
+                declaration.TrackingCode = Guid.NewGuid().ToString().Substring(0, 8);
+                var result = await _declarationRepository.Create(declaration);
 
                 if (result == true)
                 {
-                    return RedirectToAction("Orders", "Home");
+                    return RedirectToAction("Declarations", "Home");
                 }
                 else
                 {
@@ -209,15 +230,22 @@ namespace Limak.az.Areas.Admin.Controllers
                 }
             }
 
-            return View(declarationViewModel);
+            return View(declaration);
 
            }
-
 
         public IActionResult EditDeclaration(int id)
         {
             var declaration = context.Declarations.FirstOrDefault(x => x.Id == id);
-            ViewBag.StatusId = context.DeclarationStatuses.Select(
+
+            ViewBag.Warehouse = context.Warehouses.Select(
+                c => new SelectListItem()
+                {
+                    Text = c.Name,
+                    Value = c.Id.ToString()
+                }).ToList();
+
+            ViewBag.Status = context.DeclarationStatuses.Select(
                c => new SelectListItem()
                {
                    Text = c.Name,
@@ -231,7 +259,14 @@ namespace Limak.az.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult EditDeclaration(Declaration declaration)
         {
-            ViewBag.StatusId = context.DeclarationStatuses.Select(
+            ViewBag.Warehouse = context.Warehouses.Select(
+                c => new SelectListItem()
+                {
+                    Text = c.Name,
+                    Value = c.Id.ToString()
+                }).ToList();
+
+            ViewBag.Status = context.DeclarationStatuses.Select(
                c => new SelectListItem()
                {
                    Text = c.Name,
@@ -244,7 +279,21 @@ namespace Limak.az.Areas.Admin.Controllers
 
         }
 
-       
+        //public async Task<IActionResult> DeleteDeclaration(int id)
+        //{
+        //    await _declarationRepository.Delete(id);
 
+        //    return RedirectToAction("Declarations");
+        //}
+
+
+        public IActionResult DeleteDeclaration(int id)
+        {
+            var declaration = context.Declarations.FirstOrDefault(x => x.Id == id);
+            context.Declarations.Remove(declaration);
+            context.SaveChanges();
+
+            return RedirectToAction("Declarations");
+        }
     }
 }

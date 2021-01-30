@@ -106,7 +106,7 @@ namespace Limak.az.Controllers
 
             if (_context.UserBalances.FirstOrDefault(x => x.UserId == userId) != null)
             {
-                //var balanceUSD = _context.UserBalances.FirstOrDefault(x => x.UserId == userId && x.CurrencyId == 1).Balance.ToString();
+                var balanceUSD = _context.UserBalances.FirstOrDefault(x => x.UserId == userId && x.CurrencyId == 1).Balance.ToString();
                 var balanceTRY = _context.UserBalances.FirstOrDefault(x => x.UserId == userId && x.CurrencyId == 2).Balance.ToString();
                 var balanceAZN = _context.UserBalances.FirstOrDefault(x => x.UserId == userId && x.CurrencyId == 3).Balance.ToString();
                 ViewBag.BalanceTRY = balanceTRY;

@@ -1084,6 +1084,21 @@ a.news-box {
     border-bottom-right-radius: 4px !important;
     border-bottom-left-radius: 4px !important;
 }
+.input-group select {
+    width: 100%;
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    font-family: Calibri, sans-serif;
+    font-weight: 400;
+    height: 40px;
+    font-size: 16px;
+    z-index: auto !important;
+    border-top-right-radius: 4px !important;
+    border-top-left-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
+    border-bottom-left-radius: 4px !important;
+}
 .form-register .input-group span {
     font-size: 14px;
     padding: 10px;

@@ -74,14 +74,7 @@
                                     <td> @item.CargoPrice</td>
                                     <td> @item.PriceResult</td>
                                     <td>
-                                        @if (item.OrderStatusId == 1)
-                                        {
-                                <a asp-action="PayForOrder" asp-controller="Order" asp-route-id="@item.Id" style="color:white;" class="btn btn-warning mr-1">ÖDƏ</a> }
-
-                            else
-                            {
-
-                                <a href="" style=" cursor: not-allowed;opacity: 0.5;" disabled class="btn btn-primary">Ödənilib</a>}
+                                <a href="" style=" cursor: not-allowed;opacity: 0.5;" disabled class="btn btn-primary">Ödənilib</a>
                                     </td>
                                     <td>
                                         <a asp-action="DeleteOrder" asp-controller="Order" asp-route-id="@item.Id" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete? This action cannot be undone.');">Sil</a>

@@ -112,18 +112,18 @@ namespace Limak.az.Areas.Admin.Controllers
                 {
                     Email = manager.Email,
                     UserName = manager.Email,
-
+                    EmailConfirmed = true,
                 };
 
                 IdentityResult identityResult = await _userManager.CreateAsync(newmanager, manager.Password);
 
                 if (identityResult.Succeeded)
                 {
-                    var rolename = await _roleManager.FindByNameAsync(RoleId);
-                    if (rolename!=null)
+                    var role = await _roleManager.FindByIdAsync(RoleId);
+                    if (role!=null)
                     {
-                        await _userManager.AddToRoleAsync(newmanager, rolename.Name);
-                        return RedirectToAction("UserList", "Home");
+                        await _userManager.AddToRoleAsync(newmanager, role.Name);
+                        return RedirectToAction("Managers", "Home");
                     }
                       
                     else

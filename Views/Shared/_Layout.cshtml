@@ -120,7 +120,7 @@
                             <li class="nav_item"><a asp-action="AboutUs" class="nav_link">Haqqımızda</a></li>
                         </ul>
                         <ul class="nav d-flex justify-content-start align-items-center static-nav navbar navbar-expand-lg list-unstyled p-0 mb-0  navbar_right">
-                            @if (User.Identity.IsAuthenticated)
+                            @if (User.Identity.IsAuthenticated && ! User.IsInRole("Admin"))
                             {
                 <li class="nav-item position-relative user-name pointer-event user-li" style="cursor: pointer;">@displayName</li>
                                 <ul class="d-none position-absolute text-center list-unstyled p-3 mb-0 h-auto user_menu" style="background-color: #fff;

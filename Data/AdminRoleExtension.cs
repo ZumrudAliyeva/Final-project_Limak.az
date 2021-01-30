@@ -35,7 +35,7 @@ namespace Limak.az.Data
                     EmailConfirmed = true
                 };
 
-                IdentityResult identityResult = await db.CreateAsync(admin, "admin1303");
+                IdentityResult identityResult = await db.CreateAsync(admin, "admin123");
                 if (identityResult.Succeeded)
                 {
                     Task<IdentityResult> res = db.AddToRoleAsync(admin, "Admin");

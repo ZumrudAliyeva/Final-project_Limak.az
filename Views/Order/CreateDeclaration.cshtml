@@ -113,7 +113,7 @@
                 </div>
                 <div class="order-body col-xs-12 h-100 mb-4">
                     <div class="row position-relative h-100">
-                        <form asp-action="CreateDeclaration" asp-controller="Order" method="POST" class="order-info col-9 col-md-9 col-sm-8 col-xs-12 p-0">
+                        <form asp-action="CreateDeclaration" asp-controller="Order" method="POST" enctype="multipart/form-data" class="order-info col-9 col-md-9 col-sm-8 col-xs-12 p-0">
                             <div asp-validation-summary="All" class="text-danger"></div>
                             <div class="order-info col-12 h-100">
                                 <div class="order-left-side block p-0">

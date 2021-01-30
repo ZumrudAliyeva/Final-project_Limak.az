@@ -70,7 +70,7 @@ namespace Limak.az.Controllers
 
                     SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
                     client.UseDefaultCredentials = false;
-                    client.Credentials = new NetworkCredential("limakmmctest@gmail.com", "Password1303");
+                    client.Credentials = new NetworkCredential("limakmmctest@gmail.com", "Password_1303");
 
                     MailMessage message = new MailMessage(new MailAddress("limakmmctest@gmail.com"), new MailAddress(userViewModel.Email));
                     client.EnableSsl = true;
@@ -159,7 +159,7 @@ namespace Limak.az.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, "Email və ya şifrə yanlışdır");
+                        ModelState.AddModelError(string.Empty, "Email təsdiq edilməyib");
                     }
                 }
 

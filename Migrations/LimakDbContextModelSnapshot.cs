@@ -43,6 +43,11 @@ namespace Limak.az.Migrations
                         {
                             Id = 2,
                             Name = "Turkey"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Azerbaijan"
                         });
                 });
 
@@ -195,7 +200,6 @@ namespace Limak.az.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FileName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Link")
@@ -264,31 +268,36 @@ namespace Limak.az.Migrations
                         new
                         {
                             Id = 2,
-                            Name = "Xarici anbarda"
+                            Name = "Ödənildi"
                         },
                         new
                         {
                             Id = 3,
-                            Name = "Yolda"
+                            Name = "Xarici anbarda"
                         },
                         new
                         {
                             Id = 4,
-                            Name = "Gömrük yoxlanışında"
+                            Name = "Yolda"
                         },
                         new
                         {
                             Id = 5,
-                            Name = "Anbarda"
+                            Name = "Gömrük yoxlanışında"
                         },
                         new
                         {
                             Id = 6,
-                            Name = "Kuryer çatdırması"
+                            Name = "Anbarda"
                         },
                         new
                         {
                             Id = 7,
+                            Name = "Kuryer çatdırması"
+                        },
+                        new
+                        {
+                            Id = 8,
                             Name = "Təhvil verildi"
                         });
                 });

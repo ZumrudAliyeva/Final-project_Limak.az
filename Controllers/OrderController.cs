@@ -111,6 +111,11 @@ namespace Limak.Controllers
                         context.SaveChanges();
 
                     }
+                    else
+                    {
+                        TempData["message"] = "Balansda kifayət qədər vəsait yoxdur.";
+                        return View(orderViewModel);
+                    }
                     ///////////////////////////////////////////////////////////////////////////////////
                     return RedirectToAction("UserPanel", "Home");
                 }

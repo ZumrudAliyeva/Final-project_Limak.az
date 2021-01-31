@@ -125,13 +125,13 @@
                 <li class="nav-item position-relative user-name pointer-event user-li" style="cursor: pointer;">@displayName</li>
                                 <ul class="d-none position-absolute text-center list-unstyled p-3 mb-0 h-auto user_menu" style="background-color: #fff;
 top: 28px;right: -13px; z-index: 10000;">
-                                    <li class="d-flex justify-content-center align-items-center"><a asp-action="UserPanel" asp-controller="Home" class="d-block w-100" data-value="">Panel səhifəsi</a></li>
-                                    <li class="d-flex justify-content-center align-items-center"><a href="" class="d-block w-100 h-100 pb-0 pt-0" data-value="">Sifarişlərim</a></li>
-                                    <li class="d-flex justify-content-center align-items-center"><a href="" class="d-block h-100 w-100 pb-0 pt-0" data-value="">Bağlamalarım</a></li>
-                                    <li class="d-flex justify-content-center align-items-center"><a href="" class="d-block h-100 w-100 pb-0 pt-0" data-value="">TL balansım</a></li>
-                                    <li class="d-flex justify-content-center align-items-center"><a href="" class="d-block h-100 w-100 pb-0 pt-0" data-value="">AZN balansım</a></li>
-                                    <li class="d-flex justify-content-center align-items-center"><a href="" class="d-block h-100 w-100 pb-0 pt-0" data-value="">Tənzimləmələr</a></li>
-                                    <li class="d-flex justify-content-center align-items-center"><a asp-action="Logout" asp-controller="Account" class="d-block h-100 w-100 pb-0 pt-0" data-value="">Hesabdan çıx</a></li>
+                                    <li class="d-flex justify-content-center align-items-center"><a asp-action="UserPanel" asp-controller="Home" class="d-block w-100" data-index="">Panel səhifəsi</a></li>
+                                    <li class="d-flex justify-content-center align-items-center"><a asp-action="UserPanel" asp-controller="Home" class="d-block w-100 h-100 pb-0 pt-0" data-index="orders">Sifarişlərim</a></li>
+                                    <li class="d-flex justify-content-center align-items-center"><a asp-action="UserPanel" asp-controller="Home" class="d-block h-100 w-100 pb-0 pt-0" data-index="declarations">Bağlamalarım</a></li>
+                                    <li class="d-flex justify-content-center align-items-center"><a asp-action="UserPanel" asp-controller="Home" class="d-block h-100 w-100 pb-0 pt-0" data-index="balanceTL">TL balansım</a></li>
+                                    <li class="d-flex justify-content-center align-items-center"><a asp-action="UserPanel" asp-controller="Home" class="d-block h-100 w-100 pb-0 pt-0" data-index="balanceAZN">AZN balansım</a></li>
+                                    <li class="d-flex justify-content-center align-items-center"><a href="" class="d-block h-100 w-100 pb-0 pt-0" data-index="">Tənzimləmələr</a></li>
+                                    <li class="d-flex justify-content-center align-items-center"><a asp-action="Logout" asp-controller="Account" class="d-block h-100 w-100 pb-0 pt-0" data-index="">Hesabdan çıx</a></li>
                                 </ul>
  }
                                             else

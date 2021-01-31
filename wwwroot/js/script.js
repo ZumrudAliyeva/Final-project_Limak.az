@@ -153,6 +153,16 @@ $(document).on('click', 'ul.userPanelList li', function () {
         GetDeclarations();
     });
 
+    $(document).on("click", ".user_menu li[data-index='orders']", function () {
+        statusId = 0;
+        GetOrders();
+    });
+    $(document).on("click", ".user_menu li[data-index='declarations']", function () {
+        declarationStatusId = 0;
+        GetDeclarations();
+    });
+
+
     var statusId = 0;
     var declarationStatusId = 0;
 

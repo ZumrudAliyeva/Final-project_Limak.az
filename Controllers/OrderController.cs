@@ -41,24 +41,6 @@ namespace Limak.Controllers
                 }).ToList();
         }
 
-        //public IEnumerable<Declaration> displayData { get; set; }
-
-        //public async Task OnGet()
-        //{
-        //    displayData = (IEnumerable<Declaration>)await context.Declarations.Select(c => c.Warehouse.Name).ToListAsync();
-        //}
-
-        //public ActionResult GetWarehouse()
-        //{
-        //    return Json(context.Warehouses.Select(x => new
-        //    {
-        //        Id = x.Id,
-        //        Name = x.Name
-        //    }).ToList(), JsonRequestBehavior.AllowGet);
-        //}
-
-
-
         public IActionResult CreateOrder()
         {
             ViewBag.Warehouse = context.Warehouses.Select(
@@ -77,14 +59,10 @@ namespace Limak.Controllers
             if (ModelState.IsValid)
             {
                 var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                var prPrice = orderViewModel.ProductPrice;
-                var cargoPrice = orderViewModel.CargoPrice;
                 var prResult = orderViewModel.PriceResult;
                 orderViewModel.UserId = userId;
                 orderViewModel.OrderStatusId = 1;
                 orderViewModel.CountryId = 2;
-                var amount = prPrice + cargoPrice;
-                prResult = amount + (amount * (5m/100m));
 
                 var result = await orderRepository.Create(orderViewModel);
 

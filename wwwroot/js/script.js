@@ -117,16 +117,16 @@ $(document).on('click', 'ul.userPanelList li', function () {
         Calculate_prResult(value);
     });
 
-    function Calculate_prResult (e){
-        var quantity = $('.quantityInput').val();
-        var sum = 0;
-        var percentVal = e * 5 / 100;
-        if (e > 0) {
-            sum += (e + percentVal) * quantity;
-        }
-        $('.priceResult').val(sum);
-        console.log(percentVal);
-        console.log(sum);
+    function Calculate_prResult (){
+        var totalPrice =
+            parseInt($('.quantityInput').val()) *
+            (parseInt($('.priceInpt').val()) +
+            parseInt($('.priceInpt').val()) * 0.05 +
+            parseInt($('.cargoInpt').val()) +
+            parseInt($('.cargoInpt').val()) * 0.05)
+
+        $('.priceResult').val(totalPrice);
+        console.log(totalPrice);
     }
 
 
